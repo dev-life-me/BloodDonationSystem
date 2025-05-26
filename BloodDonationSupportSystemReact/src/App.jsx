@@ -1,27 +1,20 @@
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Layout from './layouts/layout'
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Contact from './pages/Contact'
-import News from './pages/News'
+import { BrowserRouter } from 'react-router-dom'
 
+import CustomRoute from './routes/CustomRoute'
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function App() {
   const [isOpenLogin, setIsOpenLogin] = useState(false)
   const [user, setUser] = useState(null);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Layout/>}>
-            <Route path='/login' element={<Login/>}></Route>
-            <Route path='/home' element={<Home/>}></Route>
-             <Route path='/contact' element={<Contact/>}></Route>
-             <Route path='/news' element={<News/>}></Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  )
+    <GoogleOAuthProvider clientId='581056826760-guivkvbnune28fsfipvi0blao6afqv6i.apps.googleusercontent.com'>
+      <BrowserRouter>
+        <CustomRoute />
+      </BrowserRouter>
+    </GoogleOAuthProvider>
+  );
 }
 
 export default App

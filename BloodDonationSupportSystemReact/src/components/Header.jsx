@@ -4,33 +4,51 @@ import { useNavigate } from 'react-router-dom';
 const Header = ({openLogin, setIsOpenLogin}) => {
     const navigate = useNavigate();
   
-  const handleClick = () => {
-    navigate('/login')
+  const handleClickSignin = () => {
+    navigate('/signin')
+  };
+  const handleClickSignup = () => {
+    navigate('/signup')
   };
     return (
         <>
-            <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static">
+            <Box sx={{ flexGrow: 1  }} >
+                <AppBar position="static" sx={{ backgroundColor: 'white' }}>
                     <Toolbar>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>                          
+                        <Box sx={{ display: 'flex', alignItems: 'center', color: 'black' }}>                          
                             <Typography variant="h6" component="div" >
-                                My Application
+                                Giọt máu vàng
                             </Typography>
                         </Box>
                         <Box sx={{ flexGrow: 1 }} />
                         <Button
-                            color="white"
+                            color="black"
                             variant="outlined"
-                            onClick={handleClick}
+                            onClick={handleClickSignin}
                             sx={{
-                                borderColor: 'white',
+                                borderColor: 'black',
                                 '&:hover': {
-                                    borderColor: 'white',
+                                    borderColor: 'black',
                                     backgroundColor: 'rgba(255, 255, 255, 0.1)'
                                 }
                             }}
                         >
-                            <Typography>Login</Typography>
+                            <Typography sx={{color: 'black'}}>Đăng nhập</Typography>
+                        </Button>
+                        <Box sx={{ width: 16 }} />
+                        <Button
+                            color="black"
+                            variant="outlined"
+                            onClick={handleClickSignup}
+                            sx={{
+                                borderColor: 'black',
+                                '&:hover': {
+                                    borderColor: 'black',
+                                    backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            }}
+                        >
+                            <Typography sx={{color: 'black'}}>Đăng ký</Typography>
                         </Button>
                     </Toolbar>
                 </AppBar>
