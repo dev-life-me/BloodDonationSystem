@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import {
-  Avatar,
   Box,
   Button,
-  Checkbox,
+
   Container,
-  CssBaseline,
+ 
   Divider,
-  FormControlLabel,
+  
   Grid,
   IconButton,
   InputAdornment,
@@ -21,8 +20,9 @@ import { useForm } from 'react-hook-form';
 import { GoogleLogin } from '@react-oauth/google';
 import login from '../../api/login2';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-export default function LoginPage() {
+export default function LoginPageV2() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const {
@@ -43,8 +43,12 @@ export default function LoginPage() {
    }
   };
 
-  const handleGoogleLogin = (credentialResponse) => {
-    console.log('Google Credential:', credentialResponse);
+  const handleGoogleLogin = async () => {
+        const res = await axios.post("http://localhost:8090/api/auth/google", {
+          
+          
+    });
+    console.log(res.data);
     // Call Google login API here
   };
 
@@ -106,10 +110,7 @@ export default function LoginPage() {
                 }
               }}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Ghi nhớ đăng nhập"
-            />
+            
             <Button
               type="submit"
               fullWidth
@@ -129,7 +130,7 @@ export default function LoginPage() {
 
           <Divider sx={{ my: 3 }}>Hoặc tiếp tục với</Divider>
 
-          <GoogleLogin onSuccess={handleGoogleLogin} onError={() => console.log("Google login error")} />
+          <Button onClick={handleGoogleLogin} onError={() => console.log("Google login error")} >Click Me</Button>
 
           <Grid container justifyContent="center" sx={{ mt: 3 }}>
             <Grid >
