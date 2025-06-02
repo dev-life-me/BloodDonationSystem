@@ -1,3 +1,4 @@
+
 import { Box, Container, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -27,6 +28,7 @@ const newsList = [
 		link: "/news/3",
 	},
 ];
+
 
 export default function News() {
 	return (
