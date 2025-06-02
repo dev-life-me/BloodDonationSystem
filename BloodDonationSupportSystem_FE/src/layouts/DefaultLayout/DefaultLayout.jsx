@@ -1,16 +1,18 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import Footer from '../../components/Footer';
-import { useState } from 'react';
 import AppBarHeader from '../AppBarHeader';
+import { useEffect } from 'react';
 
 
 export default function DefaultLayout() {
     
-    const pages = ['Home', 'News', 'Question', 'Contact']
-    const settings = ['Profile', 'Account', 'Logout']
+    // useEffect(
+
+    // )
+
     return (
         <>
-            <AppBarHeader pages={pages} settings={settings}/>
+            <AppBarHeader/>
             <Outlet />
             <Footer></Footer>
         </>

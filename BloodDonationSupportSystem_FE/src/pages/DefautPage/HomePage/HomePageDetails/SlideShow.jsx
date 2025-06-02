@@ -11,10 +11,7 @@ const slides = [
     image: "/banner/banner2.jpg",
     caption: "Hinh 2",
   },
-  {
-    image: "/banner/banner3.jpg",
-    caption: "Hinh 3",
-  },
+
 ];
 
 const Banner = () => {
@@ -29,7 +26,7 @@ const Banner = () => {
   };
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 7000);
+    const timer = setInterval(nextSlide, 10000);
     return () => clearInterval(timer);
   }, []);
 
