@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,12 +12,43 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Link, useNavigate } from 'react-router-dom';
-import { ButtonGroup } from '@mui/material';
 
 
 
-function AppBarHeader({ pages, settings, isLogin = false }) {
 
+function AppBarHeader() {
+  //'Home', 'News', 'q-a', 'Contact'
+  const pages = [
+    {
+      title: "Trang Chủ",
+      path: "/home"
+    }, {
+      title: "Tin Tức",
+      path: "/news"
+    },
+    {
+      title: "Hỏi - Đáp",
+      path: "/q-a"
+    }, {
+      title: "Liên Hệ",
+      path: "/contact"
+    }
+  ];
+  //'Profile', 'Account', 'Logout'
+  const settings = [
+    {title : "Hồ Sơ",
+      path : "user/profile"
+    },
+    {title : "Lịch Sử Hiến Máu",
+      path : "user/donation-histories"
+    }
+  ]
+  // Get User Infor fake API. If have real API will decode TOkEN to GET Name and Role to Auth.
+  //  if get Token is null will dont display permission of member like avata name
+  const [user, setUser] = useState({
+    fullName : "Trương Anh Tuấn",
+    role : "member"
+  });
   // handle Link
 
   const navigate = useNavigate();
@@ -26,13 +57,18 @@ function AppBarHeader({ pages, settings, isLogin = false }) {
     navigate('/login')
   };
   const handleClickSignup = () => {
-    navigate('/signup')
+    navigate('/register')
   };
+  const handleLogout = () => {
+    setUser(null);
+    navigate('/')
+  }
+
 
 
   //  handle UI
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -54,7 +90,7 @@ function AppBarHeader({ pages, settings, isLogin = false }) {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* logo */}
-          <img src="/logo/logo.png" alt="Logo" style={{ height: 100 }} />
+          <img src="/logo/logo.png" alt="Logo" style={{ height: 64 }} />
           {/* display menu icon and menu small screen*/}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -84,28 +120,29 @@ function AppBarHeader({ pages, settings, isLogin = false }) {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center', color: "black" } } to={`/${page}`} component={Link} >{page}</Typography>
+              {pages.map(({title, path}) => (
+                <MenuItem key={title} onClick={handleCloseNavMenu}>
+                  <Typography sx={{ textAlign: 'center', color: "black" }} to={path} component={Link} >{title}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           {/* display menu with large screen */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
+            {pages.map(({title, path}) => (
               <Button
-                key={page}
+                key={title}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' }}
-                href={`/${page}`}
+                sx={{ my: 2, color: 'black', display: 'block', textAlign: 'center' }}
+                component={Link}
+                to={path}
               >
-                {page}
+                {title}
               </Button>
             ))}
           </Box>
           {/* display when login success */}
-          {isLogin && <Box sx={{ flexGrow: 0 }}>
+          {user && <Box sx={{ flexGrow: 0 }}>
             {/* display avatar */}
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -129,29 +166,33 @@ function AppBarHeader({ pages, settings, isLogin = false }) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+              {settings.map(({title, path}) => (
+                <MenuItem key={title} onClick={handleCloseUserMenu}>
+                  <Typography sx={{ textAlign: 'center' }} component={Link} to={path}>{title}</Typography>
                 </MenuItem>
               ))}
+              {/* button logout */}
+              <MenuItem key={"logout"} onClick={handleCloseUserMenu}>
+                  <Typography sx={{ textAlign: 'center' }} onClick={handleLogout}>Logout</Typography>
+                </MenuItem>
             </Menu>
           </Box>}
           {/* display box login or signup */}
-          {!isLogin &&
-              <Button
-                color="black"
-                variant="outlined"
-                onClick={handleClickSignin}
-                sx={{
+          {!user &&
+            <Button
+              color="black"
+              variant="outlined"
+              onClick={handleClickSignin}
+              sx={{
+                borderColor: 'black',
+                '&:hover': {
                   borderColor: 'black',
-                  '&:hover': {
-                    borderColor: 'black',
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)'
-                  }
-                }}
-              >
-                <Typography sx={{ color: 'black' }}>Đăng nhập</Typography>
-              </Button>
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                }
+              }}
+            >
+              <Typography sx={{ color: 'black' }}>Đăng nhập</Typography>
+            </Button>
           }
         </Toolbar>
       </Container>
