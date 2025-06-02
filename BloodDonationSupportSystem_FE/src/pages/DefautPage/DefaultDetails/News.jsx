@@ -41,8 +41,8 @@ export default function News() {
 					justifyContent="center"
 					alignItems="stretch"
 					sx={{
-						flexWrap: "nowrap", // Không xuống dòng, luôn nằm 1 hàng ngang
-						overflowX: "auto",  // Cho phép cuộn ngang nếu nhỏ hơn màn hình
+						flexWrap: "nowrap", 
+						overflowX: "auto",  
 					}}
 				>
 					{newsList.map((news) => (
@@ -50,7 +50,7 @@ export default function News() {
 							item
 							key={news.id}
 							sx={{
-								flex: "0 0 340px", // Card vuông, cố định chiều rộng
+								flex: "0 0 340px", 
 								maxWidth: 340,
 								minWidth: 340,
 								display: "flex",
@@ -60,7 +60,7 @@ export default function News() {
 								<Card
 									sx={{
 										width: 1,
-										height: 340, // Card vuông
+										height: 340, 
 										display: "flex",
 										flexDirection: "column",
 										alignItems: "center",
