@@ -2,11 +2,8 @@ import { useState } from 'react';
 import {
   Box,
   Button,
-
   Container,
- 
   Divider,
-  
   Grid,
   IconButton,
   InputAdornment,
@@ -18,11 +15,10 @@ import {
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useForm } from 'react-hook-form';
 import { GoogleLogin } from '@react-oauth/google';
-import login from '../../api/login2';
+import { login } from '../../../api/AuthService';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
-export default function LoginPageV2() {
+export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const {
@@ -37,18 +33,14 @@ export default function LoginPageV2() {
 
   const onSubmit = (data) => {
     console.log('Form Data:', data);
-   const flag = login(data)
-   if(flag){
-    navigate('/user')
+   const isSuccess = login(data)
+   if(isSuccess){
+    navigate('/')
    }
   };
 
-  const handleGoogleLogin = async () => {
-        const res = await axios.post("http://localhost:8090/api/auth/google", {
-          
-          
-    });
-    console.log(res.data);
+  const handleGoogleLogin = (credentialResponse) => {
+    console.log('Google Credential:', credentialResponse);
     // Call Google login API here
   };
 
@@ -66,14 +58,14 @@ export default function LoginPageV2() {
             <TextField
               margin="normal"
               fullWidth
-              id="account"
+              id="phoneNumber"
               label="Số điện thoại"
-              name="account"
+              name="phoneNumber"
               autoComplete="tel"
               autoFocus
               error={!!errors.account}
               helperText={errors.account?.message}
-              {...register('account', {
+              {...register('phoneNumber', {
                 required: 'Số điện thoại là bắt buộc',
                 pattern: {
                   value: /^[0-9]{10,15}$/,
@@ -130,7 +122,7 @@ export default function LoginPageV2() {
 
           <Divider sx={{ my: 3 }}>Hoặc tiếp tục với</Divider>
 
-          <Button onClick={handleGoogleLogin} onError={() => console.log("Google login error")} >Click Me</Button>
+          <GoogleLogin onSuccess={handleGoogleLogin} onError={() => console.log("Google login error")} />
 
           <Grid container justifyContent="center" sx={{ mt: 3 }}>
             <Grid >
