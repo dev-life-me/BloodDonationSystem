@@ -21,15 +21,33 @@ const newsData = [
     title: "NGÀY TOÀN DÂN HIẾN MÁU 7/4/2025",
     highlight: null,
     video: "https://www.youtube.com/embed/ixl95-h6NfA",
-    details: `Xin kính chào quý thính giả! Hôm nay, ngày 7/4, chúng ta cùng nhau hướng về một ngày ý nghĩa – Ngày Toàn dân hiến máu tình nguyện. Đây là dịp để tôn vinh nghĩa cử cao đẹp của những người đã và đang hiến máu, cũng như kêu gọi cộng đồng cùng chung tay vì sự sống của hàng triệu bệnh nhân.\n\nBạn có biết? Mỗi giọt máu cho đi không chỉ giúp cứu sống người bệnh mà còn lan tỏa tinh thần nhân ái, sẻ chia trong xã hội. Mỗi năm, Việt Nam cần khoảng 2 triệu đơn vị máu, nhưng nguồn cung vẫn còn thiếu hụt. Vì vậy, sự tham gia của mỗi chúng ta sẽ giúp lấp đầy khoảng trống đó.`
+    details: `Xin kính chào quý thính giả! Hôm nay, ngày 7/4, chúng ta cùng nhau hướng về một ngày ý nghĩa – Ngày Toàn dân hiến máu tình nguyện. Đây là dịp để tôn vinh nghĩa cử cao đẹp của những người đã và đang hiến máu, cũng như kêu gọi cộng đồng cùng chung tay vì sự sống của hàng triệu bệnh nhân.
+
+Bạn có biết? Mỗi giọt máu cho đi không chỉ giúp cứu sống người bệnh mà còn lan tỏa tinh thần nhân ái, sẻ chia trong xã hội. Mỗi năm, Việt Nam cần khoảng 2 triệu đơn vị máu, nhưng nguồn cung vẫn còn thiếu hụt. Vì vậy, sự tham gia của mỗi chúng ta sẽ giúp lấp đầy khoảng trống đó.
+
+💉 HIẾN MÁU KHÔNG ẢNH HƯỞNG SỨC KHỎE
+
+Nhiều người lo lắng rằng hiến máu có thể gây hại cho cơ thể. Nhưng thực tế, cơ thể chúng ta có khả năng tái tạo máu rất nhanh. Chỉ sau vài ngày, lượng máu đã hiến sẽ được bù đắp. Đồng thời, việc hiến máu còn giúp kiểm tra sức khỏe miễn phí, mang lại nhiều lợi ích cho chính người hiến.
+
+💖 "MỖI GIỌT MÁU CHO ĐI - MỘT CUỘC ĐỜI Ở LẠI"
+
+Hãy cùng nhau biến hành động nhỏ bé này thành một phong trào mạnh mẽ. Nếu bạn đủ điều kiện sức khỏe, đừng ngần ngại đăng ký hiến máu tại các bệnh viện, trung tâm hiến máu gần nhất.
+
+📢 Hãy hành động ngay hôm nay! Một giọt máu của bạn có thể là cơ hội sống của ai đó. Chúng tôi tin rằng, khi trao đi yêu thương, chúng ta sẽ nhận lại hạnh phúc!`
   },
   {
     id: "3",
     title: "ÁP DỤNG CÔNG NGHỆ SỐ TRONG HOẠT ĐỘNG HIẾN MÁU TÌNH NGUYỆN",
-    highlight: "Ngày 04/3, tại Trung tâm Hiến máu nhân đạo, Hội Chữ thập đỏ Thành phố phối hợp Hội Tin học Thành phố cùng với sự đồng hành của các đối tác thực hiện trao tặng trang thiết bị phục vụ cho công tác hiến máu tình nguyện.",
+    highlight: null,
     images: [
       "https://giotmauvang.org.vn/assets/images/da5501e9bb4fde7f2a6c831c04eae5e7.jpg",
-      "https://giotmauvang.org.vn/assets/images/533264e9c9e77b4a13e2d44c1985ab92.jpg"
+      "https://giotmauvang.org.vn/assets/images/533264e9c9e77b4a13e2d44c1985ab92.jpg",
+      "https://giotmauvang.org.vn/assets/images/aada7a63e3d69e6e4b28ff9bf302a131.jpg" // thêm ảnh mới
+    ],
+    imageCaptions: [
+      "",
+      "",
+      "02 kiosk “Giọt máu vàng” được đặt tại 02 điểm hiến máu cố định của Trung tâm Hiến máu nhân đạo TP" // thêm caption mới
     ],
     details: `Ngày 04/3, tại Trung tâm Hiến máu nhân đạo, Hội Chữ thập đỏ Thành phố phối hợp Hội Tin học Thành phố cùng với sự đồng hành của các đối tác thực hiện trao tặng trang thiết bị phục vụ cho công tác hiến máu tình nguyện.`
   },
@@ -39,7 +57,7 @@ export default function NewsDetail() {
   const { id } = useParams();
   const news = newsData.find((item) => item.id === id);
 
-  if (!news) return <Container><Typography>Không tìm thấy tin tức!</Typography></Container>;
+  if (!news) return <Container><Typography>Không có tin tức mới!</Typography></Container>;
 
   return (
     <Container>
@@ -111,11 +129,18 @@ export default function NewsDetail() {
         {news.id === "1" ? (
           <>
             {news.highlight && (
-              <Typography variant="h6" sx={{ fontWeight: 700, marginBottom: 2 }}>
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: 700, marginBottom: 2, fontSize: { xs: "1.3rem", sm: "1.5rem", md: "1.7rem" } }} 
+              >
                 {news.highlight}
               </Typography>
             )}
-            <Typography variant="body1" color="text.secondary" sx={{ marginTop: 2, textAlign: "justify", whiteSpace: "pre-line" }}>
+            <Typography
+              variant="body1"
+              color="text.secondary"
+              sx={{ marginTop: 2, textAlign: "justify", whiteSpace: "pre-line", fontSize: { xs: "1.2rem", sm: "1.3rem", md: "1.4rem" } }} 
+            >
               {news.details}
             </Typography>
             {news.images && news.images.length > 0 && (
@@ -134,7 +159,11 @@ export default function NewsDetail() {
                       }}
                     />
                     {news.imageCaptions && news.imageCaptions[idx] && (
-                      <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 1 }}>
+                      <Typography
+                        variant="caption"
+                        color="text.secondary"
+                        sx={{ display: "block", mt: 1, fontSize: { xs: "1.2rem", sm: "1.3rem", md: "1.5rem" } }} 
+                      >
                         {news.imageCaptions[idx]}
                       </Typography>
                     )}
@@ -142,12 +171,16 @@ export default function NewsDetail() {
                 ))}
               </Box>
             )}
-            <Typography variant="body1" color="text.secondary" sx={{ marginTop: 2, textAlign: "justify", whiteSpace: "pre-line" }}>
+            <Typography
+              variant="body1"
+              color="text.secondary"
+              sx={{ marginTop: 2, textAlign: "justify", whiteSpace: "pre-line", fontSize: { xs: "1.2rem", sm: "1.3rem", md: "1.4rem" } }} 
+            >
               Tham dự còn có: ông Juan Pedro Schaerer Trưởng đoàn đại diện Ủy ban Chữ thập đỏ quốc tế khu vực tại Bangkok; bà Kathryn Clarkson, Trưởng đoàn đại diện Hiệp Hội Chữ thập đỏ và Trăng lưỡi liềm đỏ quốc tế khu vực tại Bangkok; Tổng Lãnh sự Lãnh sự quán Hungary tại Việt Nam; Tổng Lãnh sự Lãnh sự quán Campuchia tại Việt Nam; đại diện Tổng lãnh sự quán các nước Anh, Trung Quốc, Cuba, Indonesia… tại Việt Nam.
 
               Phó Chủ tịch, Tổng thư ký điều hành công việc Hội Chữ thập đỏ Việt Nam Nguyễn Hải Đăng, cho biết triển khai chính thức từ năm 2021, Tháng Nhân đạo đã trở thành biểu tượng sống động của tinh thần “cả nước làm nhân đạo”, kết nối hàng triệu trái tim vì một Việt Nam nhân ái và bền vững. Thời gian qua, tổng giá trị vận động đạt trên 3.700 tỷ đồng, trợ giúp hơn 7,3 triệu lượt người. Riêng Tháng Nhân đạo năm 2024, đạt trên 763 tỷ đồng, trợ giúp trên 1,6 triệu lượt người.
             </Typography>
-            {/* 2 anh tiep theotheo */}
+            {/* 2 anh tiep theo o id1 */}
             <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3, my: 3 }}>
               <Box sx={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
                 <img
@@ -174,28 +207,39 @@ export default function NewsDetail() {
                     display: "block"
                   }}
                 />
-                <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 1 }}>
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                  sx={{ display: "block", mt: 1, fontSize: { xs: "1.2rem", sm: "1.3rem", md: "1.5rem" } }} 
+                >
                   Các tình nguyện viên hiến máu tình nguyện
                 </Typography>
               </Box>
             </Box>
-            <Typography variant="body1" color="text.secondary" sx={{ marginTop: 2, textAlign: "justify", whiteSpace: "pre-line" }}>
-               Với chủ đề “Hành trình nhân đạo - Lan tỏa yêu thương”, không chỉ là một lời hiệu triệu, mà còn là hành trình truyền cảm hứng, khơi nguồn yêu thương và cam kết đồng hành bền bỉ, sẻ chia, nhân lên sức mạnh của sự tử tế và tinh thần đoàn kết toàn dân tộc, xây dựng cộng đồng nhân ái, nhân văn, không để ai bị bỏ lại phía sau.
+            <Typography
+              variant="body1"
+              color="text.secondary"
+              sx={{ marginTop: 2, textAlign: "justify", whiteSpace: "pre-line", fontSize: { xs: "1.2rem", sm: "1.3rem", md: "1.4rem" } }} 
+            >
+              Với chủ đề “Hành trình nhân đạo - Lan tỏa yêu thương”, không chỉ là một lời hiệu triệu, mà còn là hành trình truyền cảm hứng, khơi nguồn yêu thương và cam kết đồng hành bền bỉ, sẻ chia, nhân lên sức mạnh của sự tử tế và tinh thần đoàn kết toàn dân tộc, xây dựng cộng đồng nhân ái, nhân văn, không để ai bị bỏ lại phía sau.
 
-                Thay mặt chính quyền TPHCM - Ban Chỉ đạo vận động hiến máu tình nguyện Thành phố, Phó Chủ tịch UBND TPHCM Trần Thị Diệu Thúy cảm ơn Tổng Lãnh sự các nước đã quan tâm và phối hợp Hội Chữ thập đỏ TPHCM vận động, tổ chức Ngày hội hiến máu tình nguyện dành cho cán bộ, nhân viên các Tổng Lãnh sự quán tại TPHCM.
+              Thay mặt chính quyền TPHCM - Ban Chỉ đạo vận động hiến máu tình nguyện Thành phố, Phó Chủ tịch UBND TPHCM Trần Thị Diệu Thúy cảm ơn Tổng Lãnh sự các nước đã quan tâm và phối hợp Hội Chữ thập đỏ TPHCM vận động, tổ chức Ngày hội hiến máu tình nguyện dành cho cán bộ, nhân viên các Tổng Lãnh sự quán tại TPHCM.
 
-                Ngoài ra, nhiều năm qua, Tổng Lãnh sự quán các nước tại TPHCM tham gia nhiều hoạt động xã hội từ thiện. Với Tháng Nhân đạo cấp quốc gia năm 2025, những nghĩa cử nhân ái đó tiếp tục lan tỏa thông qua hành động hưởng ứng phong trào hiến máu tình nguyện, do Sở Ngoại vụ, Thành đoàn và Hội Chữ thập đỏ TPHCM phối hợp thực hiện, đã vận động gần 150 cán bộ, nhân viên các Tổng Lãnh sự quán cùng tham gia. Đồng chí mong muốn Tổng Lãnh sự quán các nước luôn quan tâm các hoạt động nhân đạo xã hội, trong đó có hoạt động hiến máu tình nguyện tại TPHCM.
+              Ngoài ra, nhiều năm qua, Tổng Lãnh sự quán các nước tại TPHCM tham gia nhiều hoạt động xã hội từ thiện. Với Tháng Nhân đạo cấp quốc gia năm 2025, những nghĩa cử nhân ái đó tiếp tục lan tỏa thông qua hành động hưởng ứng phong trào hiến máu tình nguyện, do Sở Ngoại vụ, Thành đoàn và Hội Chữ thập đỏ TPHCM phối hợp thực hiện, đã vận động gần 150 cán bộ, nhân viên các Tổng Lãnh sự quán cùng tham gia. Đồng chí mong muốn Tổng Lãnh sự quán các nước luôn quan tâm các hoạt động nhân đạo xã hội, trong đó có hoạt động hiến máu tình nguyện tại TPHCM.
 
-                Phát biểu chỉ đạo, Chủ tịch Ủy ban Trung ương MTTQ Việt Nam Đỗ Văn Chiến nhấn mạnh, gần 80 năm qua, Hội Chữ thập đỏ Việt Nam đã trở thành cầu nối tin cậy giữa Đảng, Nhà nước, các tổ chức, cá nhân trong hệ thống chính trị với những người yếu thế, người có hoàn cảnh đặc biệt khó khăn.
+              Phát biểu chỉ đạo, Chủ tịch Ủy ban Trung ương MTTQ Việt Nam Đỗ Văn Chiến nhấn mạnh, gần 80 năm qua, Hội Chữ thập đỏ Việt Nam đã trở thành cầu nối tin cậy giữa Đảng, Nhà nước, các tổ chức, cá nhân trong hệ thống chính trị với những người yếu thế, người có hoàn cảnh đặc biệt khó khăn.
             </Typography>
           </>
         ) : (
           <>
             {news.highlight && (
-              <Typography variant="h6" sx={{ fontWeight: 700, marginBottom: 2 }}>
+              <Typography variant="h6" sx={{ fontWeight: 700, marginBottom: 2, fontSize: { xs: "1.3rem", sm: "1.5rem", md: "1.7rem" } }}>
                 {news.highlight}
               </Typography>
             )}
+            <Typography variant="body1" color="text.secondary" sx={{ marginTop: 2, textAlign: "justify", whiteSpace: "pre-line", fontSize: { xs: "1.2rem", sm: "1.3rem", md: "1.4rem" } }}>
+              {news.details}
+            </Typography>
             {news.images && news.images.length > 0 && (
               <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3, my: 3 }}>
                 {news.images.map((img, idx) => (
@@ -212,15 +256,38 @@ export default function NewsDetail() {
                       }}
                     />
                     {news.imageCaptions && news.imageCaptions[idx] && (
-                      <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 1 }}>
+                      <Typography
+                        variant="caption"
+                        color="text.secondary"
+                        sx={{ display: "block", mt: 1, fontSize: { xs: "1.2rem", sm: "1.3rem", md: "1.5rem" } }} 
+                      >
                         {news.imageCaptions[idx]}
                       </Typography>
+                    )}
+                    {/* caption id 3 */}
+                    {news.id === "3" && idx === 1 && (
+                      <>
+                        <Typography
+                          variant="caption"
+                          color="text.secondary"
+                          sx={{ display: "block", mt: 1, fontSize: { xs: "1.2rem", sm: "1.3rem", md: "1.5rem" } }} 
+                        >
+                          Quang cảnh nghi lễ khánh thành và bàn giao công trình
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          sx={{ display: "block", mt: 1, textAlign: "justify", whiteSpace: "pre-line", fontSize: { xs: "1.1rem", sm: "1.2rem", md: "1.25rem" } }}
+                        >
+                          Tham dự hoạt động có ông Trần Trường Sơn - Ủy viên Ban Thường vụ Trung ương Hội, Chủ tịch Hội Chữ thập đỏ Thành phố, Phó trưởng Ban Thường trực Ban Chỉ đạo vận động hiến máu tình nguyện Thành phố; ông Lâm Nguyễn Hải Long - Chủ tịch Hội Tin học Thành phố; Bác sĩ Nguyễn Phương Liên - Phó Giám đốc Bệnh viện Truyền máu huyết học; bà Phạm Thị Kim Phượng - Phó Giám đốc Công viên phần mềm Quang Trung (QTSC); ông Trương Công Nhân - Phó Tổng Giám đốc Công ty Cổ phần Công nghệ Intelin; ông Lê Thành Thủ - Phó Tổng Giám đốc Công ty Cổ phần Phần mềm Viễn thông Miền Nam…
+                        </Typography>
+                      </>
                     )}
                   </Box>
                 ))}
               </Box>
             )}
-            <Typography variant="body1" color="text.secondary" sx={{ marginTop: 2, textAlign: "justify", whiteSpace: "pre-line" }}>
+            <Typography variant="body1" color="text.secondary" sx={{ marginTop: 2, textAlign: "justify", whiteSpace: "pre-line", fontSize: { xs: "1.2rem", sm: "1.3rem", md: "1.4rem" } }}>
               {news.details}
             </Typography>
           </>
