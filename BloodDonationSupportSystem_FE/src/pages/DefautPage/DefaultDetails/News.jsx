@@ -1,4 +1,6 @@
+
 import { Box, Container, Typography, Grid, Card, CardMedia, CardContent } from "@mui/material";
+
 import { Link } from "react-router-dom";
 
 const newsList = [
@@ -27,6 +29,7 @@ const newsList = [
 		link: "/news/3",
 	},
 ];
+
 
 export default function News() {
 	return (
