@@ -43,6 +43,8 @@ const StaffLayout = () => {
       <Box
         sx={{
           flex: 8,
+          p: 2,
+
           overflowX: 'hidden',
           bgcolor: 'background.default',
         }}
