@@ -22,25 +22,40 @@ export default function Contact() {
           </AppBar>
 
           {/* Main Content */}
-          <Container sx={{ marginTop: 4, paddingTop: 4, marginBottom: 1 }}>
+          <Container sx={{ marginTop: 4, paddingTop: 4, marginBottom: 4, padding: 4 }}>
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 5 }}>
               {/* Contact Information - Left */}
               <Box sx={{ flex: '0 0 50%', minWidth: 0 }}>
-                <Card sx={{ backgroundColor: '#3B82F6', color: 'white', borderRadius: 5, padding: 3, minHeight: '60vh' }}>
-                  <Typography variant="h6">
-                    <EmailIcon sx={{ verticalAlign: 'middle', marginRight: 1 }} />
-                    Email
-                  </Typography>
-                  <Typography variant="body1">gmv@intelin.vn</Typography>
-                  <Typography variant="h6" sx={{ marginTop: 5 }}>
-                    <PhoneIcon sx={{ verticalAlign: 'middle', marginRight: 3 }} />
-                    HOTLINE
-                  </Typography>
-                  <Typography variant="body1">TT Hiền Mẫu Nhân Đạo: 028 3868 5509 / 028 3868 5507</Typography>
-                  <Typography variant="body1">Bệnh viện BTH: 028 39571342 / 028 39557858</Typography>
-                  <Typography variant="body1">TT truyền máu Chợ Rẫy: 028 39555885</Typography>
-                </Card>
-              </Box>
+      <Card sx={{ backgroundColor: '#3B82F6', color: 'white', borderRadius: 5, padding: 4, minHeight: '60vh'}}>
+        <Typography variant="h5" sx={{ fontWeight: 'bold', marginBottom: 2, alignItems: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          Liên hệ
+        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+          <EmailIcon sx={{ verticalAlign: 'middle', marginRight: 1 }} />
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+            Email
+          </Typography>
+        </Box>
+        <Typography variant="body1" sx={{ marginLeft: 4, marginBottom: 2 }}>
+          gmv@intelin.vn
+        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+          <PhoneIcon sx={{ verticalAlign: 'middle', marginRight: 1 }} />
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+            Hotline
+          </Typography>
+        </Box>
+        <Typography variant="body1" sx={{ marginLeft: 4 }}>
+          TT Hiền Mẫu Nhân Đạo: 028 3868 5509 / 028 3868 5507
+        </Typography>
+        <Typography variant="body1" sx={{ marginLeft: 4 }}>
+          Bệnh viện BTH: 028 39571342 / 028 39557858
+        </Typography>
+        <Typography variant="body1" sx={{ marginLeft: 4 }}>
+          TT truyền máu Chợ Rẫy: 028 39555885
+        </Typography>
+      </Card>
+    </Box>
 
               {/* Contact Form - Right */}
               <Box sx={{ flex: '0 0 50%', minWidth: 0 }}>
