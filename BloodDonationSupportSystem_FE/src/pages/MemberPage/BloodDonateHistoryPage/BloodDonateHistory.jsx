@@ -16,7 +16,6 @@ import {
 import { useEffect, useState } from 'react';
 import axios from '../../../config/axios';
 
-
 const getStatusIcon = (status) => {
   switch (status) {
     case 'COLLECTING':
@@ -29,7 +28,6 @@ const getStatusIcon = (status) => {
       return <Bloodtype />;
   }
 };
-
 
 const getStatusColor = (status) => {
   switch (status) {
@@ -44,11 +42,9 @@ const getStatusColor = (status) => {
   }
 };
 
-
 export default function BloodDonateHistory() {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
-
 
   useEffect(() => {
     axios
@@ -58,7 +54,6 @@ export default function BloodDonateHistory() {
       .finally(() => setLoading(false));
   }, []);
 
-
   if (loading)
     return (
       <Box mt={5} display="flex" justifyContent="center">
@@ -66,14 +61,12 @@ export default function BloodDonateHistory() {
       </Box>
     );
 
-
   if (history.length === 0)
     return (
       <Box mt={5} textAlign="center">
         <Typography variant="h6">Chưa có lịch sử hiến máu nào.</Typography>
       </Box>
     );
-
 
   return (
     <Box p={2}>
@@ -123,6 +116,3 @@ export default function BloodDonateHistory() {
     </Box>
   );
 }
-
-
-
