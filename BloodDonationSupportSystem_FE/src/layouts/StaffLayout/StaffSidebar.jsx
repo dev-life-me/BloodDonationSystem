@@ -20,7 +20,8 @@ const StaffSidebar = () => {
       items: [
         { label: 'Tổng quan', path: '/staff/overview' ,icon: <DashboardIcon /> },
         { label: 'Yêu cầu hiến máu', path: '/staff/request' ,icon: <ListAltIcon/>},
-        { label: 'Quản lí hiến máu', path: '/staff/management',icon:<ManageSearchIcon/> },
+        { label: 'Quản lí hiến máu', path: '/staff/blood-management',icon:<ManageSearchIcon/> },
+        { label: 'Lịch Hiến Máu', path: '/staff/blood-donation-schedule',icon:<ManageSearchIcon/> },
         { label: 'Kho máu', path: '/staff/storage' ,icon:<AccountBalanceIcon/>},
         { label: 'Tìm theo khoảng cách', path: '/staff/search' ,icon: <RoomIcon/> },
       ],
@@ -42,7 +43,7 @@ const StaffSidebar = () => {
   ];
 
   return (
-    <Box sx={{ width: '250px', bgcolor: '#1a51a3', height: '100vh', color: 'white' }}>
+    <Box sx={{ width: '100%', bgcolor: '#1a51a3', height: '100vh', color: 'white' }}>
       {menuItems.map((section, idx) => (
         <Box key={idx}>
           <List subheader={<div style={{ padding: '10px 16px', fontWeight: 'bold' }}>{section.title}</div>}>

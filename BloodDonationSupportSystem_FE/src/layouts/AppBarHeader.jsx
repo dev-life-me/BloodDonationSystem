@@ -41,9 +41,6 @@ function AppBarHeader() {
     },
     {title : "Lịch Sử Hiến Máu",
       path : "user/donation-histories"
-    },
-    {title : "Lịch Sử Đặt Hẹn",
-      path : "user/appointment-histories"
     }
   ]
   // Get User Infor fake API. If have real API will decode TOkEN to GET Name and Role to Auth.
@@ -140,7 +137,7 @@ function AppBarHeader() {
                 component={Link}
                 to={path}
               >
-                {title}
+               <Typography >{title}</Typography>
               </Button>
             ))}
           </Box>
@@ -148,9 +145,11 @@ function AppBarHeader() {
           {user && <Box sx={{ flexGrow: 0 }}>
             {/* display avatar */}
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
+              
+                <Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" sx={{marginRight : '10px'}}/>
+                  <Typography color='black'>{user.fullName}</Typography>
+                </Button>
             </Tooltip>
             {/* display settings */}
             <Menu
@@ -187,10 +186,8 @@ function AppBarHeader() {
               variant="outlined"
               onClick={handleClickSignin}
               sx={{
-                borderColor: 'black',
                 '&:hover': {
-                  borderColor: 'black',
-                  backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                  backgroundColor: 'rgba(30, 191, 219, 0.1)'
                 }
               }}
             >
