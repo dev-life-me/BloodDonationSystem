@@ -27,9 +27,18 @@ export default function Contact() {
               {/* Contact Information - Left */}
               <Box sx={{ flex: '0 0 50%', minWidth: 0 }}>
       <Card sx={{ backgroundColor: '#3B82F6', color: 'white', borderRadius: 5, padding: 4, minHeight: '60vh'}}>
-        <Typography variant="h5" sx={{ fontWeight: 'bold', marginBottom: 2, alignItems: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          Liên hệ
-        </Typography>
+        <Typography
+  variant="h5"
+  sx={{
+    fontWeight: 'bold',
+    marginBottom: 2,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  }}
+>
+  Liên hệ
+</Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
           <EmailIcon sx={{ verticalAlign: 'middle', marginRight: 1 }} />
           <Typography variant="h6" sx={{ fontWeight: 'bold' }}>

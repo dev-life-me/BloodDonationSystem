@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Box, 
   Tabs, 
@@ -134,12 +133,6 @@ const DonationManagement = () => {
     setAmountError('');
   };
 
-
-  const waitingDonors = [
-    { id: 'D-1028', name: 'Emily Wilson', time: '10:15 AM', status: 'Pending' },
-    { id: 'D-1029', name: 'James Brown', time: '10:30 AM', status: 'Pending' },
-    { id: 'D-1030', name: 'Sophia Martinez', time: '10:45 AM', status: 'Pending' }
-  ];
 
   const [waitingDonors, setWaitingDonors] = useState([])
   useEffect(() => {
@@ -562,4 +555,4 @@ const DonationManagement = () => {
   );
 };
 
-export default DonationManagement; 
+export default DonationManagement;
