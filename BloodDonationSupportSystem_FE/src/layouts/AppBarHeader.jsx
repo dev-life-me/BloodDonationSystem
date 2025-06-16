@@ -93,22 +93,26 @@ function AppBarHeader() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  return (
-    <AppBar position='fixed' sx={{bgcolor: 'white'}}>
+return (
+    <AppBar position='fixed' sx={{ bgcolor: 'white' }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters >
           {/* logo */}
-          <Box sx={{margin: "0px 50px 0px 10px"}}><img src="/logo/logo.png" alt="Logo" style={{ height: 64 }} /></Box>
+          <Box sx={{ margin: "10px 50px 10px 10px", display: 'flex', alignItems: 'center', gap: 1, mr: 4 }}>
+            <img src="/logo/logo.png" alt="Logo" style={{ height: 60 }} />
+            <Typography color="error" variant="h6">Trung Tâm Hiến Máu</Typography>
+          </Box>
           {/* display menu icon and menu small screen*/}
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none'} }}>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+
             <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color='black'
+              color="black"
             >
               <MenuIcon />
             </IconButton>
@@ -117,31 +121,40 @@ function AppBarHeader() {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{ display: { xs: 'block', md: 'none' } }}
+              sx={{ display: { xs: "block", md: "none" } }}
             >
               {pages.map(({ title, path }) => (
+
                 <MenuItem key={title} onClick={handleCloseNavMenu}>
                   <Typography sx={{ textAlign: 'center', color: "black" }} to={path} component={Link} >{title}</Typography>
                 </MenuItem>
               ))}
               {user && manage.map(({ title, path }) => (
+
                 <MenuItem key={title} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center', color: "black" }} to={path} component={Link} >{title}</Typography>
+                  <Typography
+                    sx={{ textAlign: "center", color: "black", textTransform: "none" }}
+                    to={path}
+                    component={Link}
+                  >
+                    {title}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           {/* display menu with large screen */}
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'left' }}>
             {pages.map(({ title, path }) => (
               <Button
@@ -149,17 +162,20 @@ function AppBarHeader() {
                 selected={selectedItem === title}
                 onClick={() => { setSelectedItem(title); navigate(path) }}
                 sx={{
-                  my: 2, mx : 1,display: 'block', textAlign: 'center',
-                  color: selectedItem === title ? 'white' : 'black',
-                  bgcolor: selectedItem === title ? '#1976d2' : 'transparent',
+                  my: 2, mx: 1, display: 'block', textAlign: 'center',
+                  color: selectedItem === title ? 'black' : 'black',
+                  borderBottom : '5px solid',
+                  borderColor : selectedItem === title ? 'red' : 'transparent',
                   '&:hover': {
-                    bgcolor: selectedItem === title ? '#1565c0' : '#f5f5f5'
+                    bgcolor:  '#f5f5f5'
                   }
+
                 }}
                 component={Link}
                 to={path}
               >
-                <Typography >{title}</Typography>
+
+                <Typography variant="h6" sx={{ textTransform: "none" }}>{title}</Typography>
               </Button>
             ))}
             {user && manage.map(({ title, path }) => (
@@ -168,20 +184,25 @@ function AppBarHeader() {
                 selected={selectedItem === title}
                 onClick={() => { setSelectedItem(title); navigate(path) }}
                 sx={{
-                  my: 2, color: 'black', display: 'block', textAlign: 'center', color: selectedItem === title ? 'white' : 'black',
-                  bgcolor: selectedItem === title ? '#1976d2' : 'transparent',
+                  my: 2, mx: 1, display: 'block', textAlign: 'center',
+                  color: selectedItem === title ? 'black' : 'black',
+                  borderBottom : '5px solid',
+                  borderColor : selectedItem === title ? 'red' : 'transparent',
                   '&:hover': {
-                    bgcolor: selectedItem === title ? '#1565c0' : '#f5f5f5'
+                    bgcolor:  '#f5f5f5'
                   }
+
                 }}
                 component={Link}
                 to={path}
               >
-                <Typography >{title}</Typography>
+                <Typography variant="h6" sx={{ textTransform: "none" }}>{title}</Typography>
+
               </Button>
             ))}
           </Box>
           {/* display when login success */}
+
           {user && <Box sx={{ flexGrow: 0 }}>
             {/* display avatar */}
             <Tooltip title="Open settings">
@@ -210,29 +231,35 @@ function AppBarHeader() {
             >
               {settings.map(({ title, path }) => (
                 <MenuItem key={title} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }} component={Link} to={path}>{title}</Typography>
+                  <Typography sx={{ textAlign: 'center', textTransform: "none" }} component={Link} to={path}>{title}</Typography>
                 </MenuItem>
+
               ))}
+              <MenuItem key={"logout"} onClick={() => { handleCloseUserMenu(); handleLogout(); }}>
+                <Typography
+                  sx={{ textAlign: "center", textTransform: "none" }}
+                >
+                  Đăng Xuất
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>}
+
           {/* display box login or signup */}
-          {!user &&
+          {!user && (
             <Button
-              color="black"
-              variant="outlined"
+              color="error"
+              variant="contained"
               onClick={handleClickSignin}
-              sx={{
-                '&:hover': {
-                  backgroundColor: 'rgba(30, 191, 219, 0.1)'
-                }
-              }}
+              
             >
-              <Typography sx={{ color: 'black' }}>Đăng nhập</Typography>
+              <Typography variant="h6" sx={{ color: "error", textTransform: "none" }}>Đăng nhập</Typography>
             </Button>
-          }
+          )}
         </Toolbar>
       </Container>
     </AppBar>
   );
+
 }
 export default AppBarHeader;
