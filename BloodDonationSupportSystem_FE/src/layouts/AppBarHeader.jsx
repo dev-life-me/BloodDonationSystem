@@ -11,8 +11,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link, useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+
 
 
 
@@ -46,10 +46,6 @@ function AppBarHeader() {
       title: "Hồ Sơ",
       path: "user/profile"
     },
-    {
-      title: "Logout",
-      path: "user/logout"
-    }
   ]
   // Get User Infor fake API. If have real API will decode TOkEN to GET Name and Role to Auth.
   //  if get Token is null will dont display permission of member like avata name
@@ -75,7 +71,11 @@ function AppBarHeader() {
 
 
   //  handle UI
-  const [selectedItem, setSelectedItem] = useState('Trang Chủ');
+  const location = useLocation();
+  const allItems = [...pages, ...(user ? manage : [])];
+  const selectedItemCurrent = allItems.find((item) => location.pathname.startsWith(item.path))?.title ?? 'Trang Chủ';
+
+  const [selectedItem, setSelectedItem] = useState(selectedItemCurrent);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
