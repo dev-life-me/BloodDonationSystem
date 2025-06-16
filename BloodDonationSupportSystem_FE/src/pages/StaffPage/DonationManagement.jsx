@@ -1,4 +1,6 @@
+
 import  { useState } from 'react';
+
 import { 
   Box, 
   Tabs, 
@@ -130,11 +132,13 @@ const DonationManagement = () => {
     setAmountError('');
   };
 
+
   const waitingDonors = [
     { id: 'D-1028', name: 'Emily Wilson', time: '10:15 AM', status: 'Pending' },
     { id: 'D-1029', name: 'James Brown', time: '10:30 AM', status: 'Pending' },
     { id: 'D-1030', name: 'Sophia Martinez', time: '10:45 AM', status: 'Pending' }
   ];
+
 
   const inProgressDonors = [
     { id: 'D-1023', name: 'John Smith', time: '09:30 AM', status: 'Collecting' },
@@ -540,4 +544,4 @@ const DonationManagement = () => {
   );
 };
 
-export default DonationManagement; 
+export default DonationManagement;
