@@ -7,20 +7,20 @@ import axios from "axios";
 
 const StaffLayout = () => {
   const navigate = useNavigate();
-  // get permission by call permission from authService or ManagementAPI to get Role to access this page
-  useEffect(() => {
-    const permision = async () => {
-      try {
-        const res = await axios.get("http://localhost:3001/staff");
-        if (res.data.role !== "staff") {
-          navigate("/404");
-        }
-      } catch (err) {
-        navigate("/404");
-      }
-    };
-    permision();
-  });
+  // // get permission by call permission from authService or ManagementAPI to get Role to access this page
+  // useEffect(() => {
+  //   const permision = async () => {
+  //     try {
+  //       const res = await axios.get("http://localhost:3001/staff");
+  //       if (res.data.role !== "staff") {
+  //         navigate("/404");
+  //       }
+  //     } catch (err) {
+  //       navigate("/404");
+  //     }
+  //   };
+  //   permision();
+  // });
 
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
