@@ -9,17 +9,17 @@ export default function MemberLayout() {
 
      const navigate = useNavigate();
 
-  //auth
-  useEffect(() => {
-    const checkLogin = async () => {
-      const token = localStorage.getItem('token')
-      if (!token) {
-        navigate("/403");
-      }
-    };
+  // //auth
+  // useEffect(() => {
+  //   const checkLogin = async () => {
+  //     const token = localStorage.getItem('token')
+  //     if (!token) {
+  //       navigate("/403");
+  //     }
+  //   };
 
-    checkLogin;
-  }, [navigate]);
+  //   checkLogin;
+  // }, [navigate]);
 
     return (
         <>
