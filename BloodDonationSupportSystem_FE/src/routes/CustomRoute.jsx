@@ -27,12 +27,15 @@ import CreateBloodBagPage from "../pages/StaffPage/CreateBloodBagPage";
 import FindDistancePage from "../pages/StaffPage/FindByDistance/FindDistancePage";
 
 import BloodStorageChart from "../pages/StaffPage/BloodStorageChart";
-import BloodDonationRegisterContainer from "../pages/MemberPage/BloodDonationRegisterPage/BloodDonationRegisterContainer";
+
 
 
 
 import ProfilePage from "../pages/MemberPage/ProfilePage/ProfilePage";
 import UserManagement from "../pages/AdminPage/UserManagement/UserManagementPage"
+import ArticlePage from "../pages/AdminPage/managementhomepage/AdminPosts";
+import DonationRegistration from "../pages/MemberPage/DonationRegistration/DonationRegistration";
+import BloodDonationRequestPage from "../pages/StaffPage/BloodDonationRequestPage/BloodDonationRequestPage";
 
 
 
@@ -54,7 +57,7 @@ const CustomRoute = () => {
 
          <Route path="appointment-histories" element={<AppointmentHistory />} />
                     <Route path="appointment-histories/:id" element={<AppointmentDetail />} />
-                    <Route path="blood-donation-register" element={<BloodDonationRegisterContainer/>} />
+                    <Route path="blood-donation-register" element={<DonationRegistration/>} />
                      <Route path="profile" element={<ProfilePage />} />
         </Route>
       </Route>
@@ -67,6 +70,7 @@ const CustomRoute = () => {
         <Route path="storage/dashboard" element={<BloodStorageChart/>}/>
         <Route path="find-by-distance" element={<FindDistancePage />} />
         <Route path="blood-management" element={<DonationManagement />} />
+         <Route path="request" element={<BloodDonationRequestPage />} />
         <Route
           path="blood-donation-schedule"
           element={<BloodDonationScheduleComponent />}
@@ -77,6 +81,7 @@ const CustomRoute = () => {
       <Route path="/admin/*" element={<AdminLayout />}>
         <Route path="overview" element={<BloodDonorReport />} />
         <Route path="user-management" element={<UserManagement />} />
+        <Route path="posts" element={<ArticlePage/>} />
       </Route>
       {/* Error Route */}
       <Route path="/404" element={<ErrorPage />}></Route>
