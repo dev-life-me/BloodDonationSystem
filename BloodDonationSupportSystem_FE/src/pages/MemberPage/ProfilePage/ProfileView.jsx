@@ -11,30 +11,29 @@ import {
 
 const ProfileView = ({ user, onEdit }) => {
   return (
-    <Paper sx={{ width: '100%', height: 'auto', m: 'auto', padding: 5 }}>
-      <Stack spacing={2}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
-          <strong>Thông tin tài khoản</strong>
-        </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Avatar src={user.avatar || 'https://via.placeholder.com/150'} sx={{ width: 80, height: 80 }} />
-          <Box>
-            <Typography variant="h5">{user.fullName}</Typography>
-            <Typography variant="body2" color="text.secondary">
-              {user.phoneNumber}
-            </Typography>
+    <Box sx={{ m: 10 }}>
+      <Paper sx={{width : 500, padding: 2, margin: 'auto'}}>
+        <Stack spacing={2}>
+          <Typography variant='h5'>Thông tin cá nhân</Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Box>
+              <Typography ><strong>Họ và tên:</strong>{user.fullName}</Typography>
+              <Typography><strong>Giới tính:</strong> {user.gender}</Typography>
+              <Typography><strong>Ngày sinh:</strong> {user.dob}</Typography>
+              <Typography><strong>Nhóm máu:</strong> {user.bloodType}</Typography>
+              <Typography><strong>Địa chỉ:</strong> {user.address}</Typography>
+            </Box>
           </Box>
-        </Box>
-        <Divider />
-        <Typography><strong>Address:</strong> {user.address}</Typography>
-        <Typography><strong>Gender:</strong> {user.gender}</Typography>
-        <Typography><strong>Date of Birth:</strong> {user.dateOfBirth}</Typography>
-        <Typography><strong>Blood Type:</strong> {user.bloodType}</Typography>
-        <Box display="flex" justifyContent="flex-end">
-          <Button variant="contained" onClick={onEdit}>Edit</Button>
-        </Box>
-      </Stack>
-    </Paper>
+          <Divider />
+           <Typography variant='h5'>Liên hệ</Typography>
+          <Typography><strong>Số điện thoại:</strong> {user.phoneNumber}</Typography>
+          <Typography><strong>Email:</strong> {user.email}</Typography>
+          <Box >
+            <Button variant="contained" onClick={onEdit}>Edit</Button>
+          </Box>
+        </Stack>
+      </Paper>
+    </Box>
   );
 };
 
