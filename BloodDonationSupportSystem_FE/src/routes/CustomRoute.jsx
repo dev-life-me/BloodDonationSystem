@@ -37,6 +37,10 @@ import ArticlePage from "../pages/AdminPage/managementhomepage/AdminPosts";
 import DonationRegistration from "../pages/MemberPage/DonationRegistration/DonationRegistration";
 import BloodDonationRequestPage from "../pages/StaffPage/BloodDonationRequestPage/BloodDonationRequestPage";
 
+import DonorHealthCheckPage from "../pages/StaffPage/ProcessManagement/DonorHealthCheckPage";
+import DonorProcessPage from "../pages/StaffPage/ProcessManagement/DonorProcessPage";
+
+
 
 
 const CustomRoute = () => {
@@ -69,7 +73,7 @@ const CustomRoute = () => {
         <Route path="storage/create" element={<CreateBloodBagPage />} />
         <Route path="storage/dashboard" element={<BloodStorageChart/>}/>
         <Route path="find-by-distance" element={<FindDistancePage />} />
-        <Route path="blood-management" element={<DonationManagement />} />
+        <Route path="blood-management" element={<DonorHealthCheckPage />} />
          <Route path="request" element={<BloodDonationRequestPage />} />
         <Route
           path="blood-donation-schedule"
