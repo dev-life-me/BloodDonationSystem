@@ -36,7 +36,7 @@ import UserManagement from "../pages/AdminPage/UserManagement/UserManagementPage
 import ArticlePage from "../pages/AdminPage/managementhomepage/AdminPosts";
 import DonationRegistration from "../pages/MemberPage/DonationRegistration/DonationRegistration";
 import BloodDonationRequestPage from "../pages/StaffPage/BloodDonationRequestPage/BloodDonationRequestPage";
-
+import OverViewPage from "../pages/AdminPage/OverviewPage/OverViewPage";
 
 
 const CustomRoute = () => {
@@ -79,7 +79,7 @@ const CustomRoute = () => {
 
       {/* Admin Route */}
       <Route path="/admin/*" element={<AdminLayout />}>
-        <Route path="overview" element={<BloodDonorReport />} />
+        <Route path="overview" element={<OverViewPage />} />
         <Route path="user-management" element={<UserManagement />} />
         <Route path="posts" element={<ArticlePage/>} />
       </Route>
