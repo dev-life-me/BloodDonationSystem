@@ -10,6 +10,7 @@ import ForgotPasswordPage from "../pages/DefautPage/ForgotPasswordPage/ForgotPas
 import RegisterPage from "../pages/DefautPage/RegisterPage/RegisterPage";
 import MemberLayout from "../layouts/MemberLayout/MemberLayout";
 
+import OverViewPage from "../pages/AdminPage/OverviewPage/OverViewPage";
 import AppointmentHistory from "../pages/MemberPage/BloodDonateHistoryPage/AppointmentHistory";
 
 import AdminLayout from "../layouts/AdminLayout/AdminLayout";
@@ -17,11 +18,11 @@ import StaffLayout from "../layouts/StaffLayout/StaffLayout";
 import Overview from "../pages/StaffPage/Overview";
 
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
-import DonationManagement from "../pages/StaffPage/DonationManagement";
+
 import BloodDonationScheduleList from "../pages/DefautPage/BloodDonationSchedulePage/BloodDonationScheduleList";
 import BloodDonationScheduleComponent from "../pages/StaffPage/BloodDonationSchedulePage/BloodDonationSchedule.Component";
 import AppointmentDetail from "../pages/MemberPage/BloodDonateHistoryPage/AppoitmentDetail";
-import BloodDonorReport from "../pages/AdminPage/OverviewPage/BloodDonorReport";
+
 import BloodStoragePage from "../pages/StaffPage/BloodStoragePage";
 import CreateBloodBagPage from "../pages/StaffPage/CreateBloodBagPage";
 import FindDistancePage from "../pages/StaffPage/FindByDistance/FindDistancePage";
@@ -36,7 +37,11 @@ import UserManagement from "../pages/AdminPage/UserManagement/UserManagementPage
 import ArticlePage from "../pages/AdminPage/managementhomepage/AdminPosts";
 import DonationRegistration from "../pages/MemberPage/DonationRegistration/DonationRegistration";
 import BloodDonationRequestPage from "../pages/StaffPage/BloodDonationRequestPage/BloodDonationRequestPage";
-import OverViewPage from "../pages/AdminPage/OverviewPage/OverViewPage";
+
+import DonorHealthCheckPage from "../pages/StaffPage/ProcessManagement/DonorHealthCheckPage";
+import DonorProcessPage from "../pages/StaffPage/ProcessManagement/DonorProcessPage";
+
+
 
 
 const CustomRoute = () => {
@@ -69,7 +74,7 @@ const CustomRoute = () => {
         <Route path="storage/create" element={<CreateBloodBagPage />} />
         <Route path="storage/dashboard" element={<BloodStorageChart/>}/>
         <Route path="find-by-distance" element={<FindDistancePage />} />
-        <Route path="blood-management" element={<DonationManagement />} />
+        <Route path="blood-management" element={<DonorHealthCheckPage />} />
          <Route path="request" element={<BloodDonationRequestPage />} />
         <Route
           path="blood-donation-schedule"
@@ -83,6 +88,8 @@ const CustomRoute = () => {
         <Route path="user-management" element={<UserManagement />} />
         <Route path="posts" element={<ArticlePage/>} />
       </Route>
+
+      
       {/* Error Route */}
       <Route path="/404" element={<ErrorPage />}></Route>
     </Routes>
