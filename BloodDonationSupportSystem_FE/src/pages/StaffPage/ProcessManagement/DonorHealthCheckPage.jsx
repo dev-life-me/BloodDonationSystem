@@ -96,10 +96,6 @@ export default function DonorHealthCheckPage() {
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
 
-      <Box>
-        <Navigation />
-      </Box>
-
       {/* ✅ Thanh tìm kiếm + lọc */}
       <Box mb={3} mt={3}>
         <FilterBarHealthCheck

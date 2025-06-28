@@ -1,18 +1,19 @@
-    import { Button, Card, CardContent, Stack, Typography, Box } from "@mui/material"
+    import { Button, Card,Container, CardContent, Stack, Typography, Box } from "@mui/material"
     import { Heart, ClipboardCheck } from "lucide-react"
+import { Outlet, useNavigate } from "react-router-dom"
 
     export function Navigation() {
 
-
+    const navigate = useNavigate()
     const navItems = [
         {
-        path: "/health-check",
+        path: "/staff/blood-management/health-check",
         label: "Sàng lọc sức khỏe",
         icon: Heart,
         description: "Kiểm tra và đánh giá tình trạng sức khỏe người hiến máu",
         },
         {
-        path: "/process",
+        path: "/staff/blood-management/process",
         label: "Quản lý tiến trình",
         icon: ClipboardCheck,
         description: "Theo dõi và quản lý toàn bộ quy trình hiến máu",
@@ -20,7 +21,7 @@
     ]
 
     return (
-        <Box>
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Card sx={{ p: 2}}>
         <CardContent >
             <Stack spacing={2} direction="row">
@@ -55,8 +56,9 @@
                 )   
             })}
             </Stack>
+            <Outlet/>
         </CardContent>
         </Card>
-        </Box>
+        </Container>
     )
     }
