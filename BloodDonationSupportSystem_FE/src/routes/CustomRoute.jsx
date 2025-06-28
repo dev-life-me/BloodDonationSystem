@@ -41,6 +41,8 @@ import BloodDonationRequestPage from "../pages/StaffPage/BloodDonationRequestPag
 import DonorHealthCheckPage from "../pages/StaffPage/ProcessManagement/DonorHealthCheckPage";
 import DonorProcessPage from "../pages/StaffPage/ProcessManagement/DonorProcessPage";
 import { Navigation } from "../pages/StaffPage/ProcessManagement/Navigation";
+import ProfileSidebar from "../pages/MemberPage/ProfilePage/ProfileSidebar";
+import ProfileLayout from "../pages/MemberPage/ProfilePage/ProfileLayout";
 
 
 
@@ -64,7 +66,9 @@ const CustomRoute = () => {
          <Route path="appointment-histories" element={<AppointmentHistory />} />
                     <Route path="appointment-histories/:id" element={<AppointmentDetail />} />
                     <Route path="blood-donation-register" element={<DonationRegistration/>} />
-                     <Route path="profile" element={<ProfilePage />} />
+                     <Route path="profile/*" element={<ProfileLayout />} >
+                      <Route index element={<ProfilePage/>}/>
+                     </Route>
         </Route>
       </Route>
 

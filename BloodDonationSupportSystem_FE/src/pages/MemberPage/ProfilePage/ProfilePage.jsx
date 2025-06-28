@@ -27,13 +27,6 @@ const ProfilePage = () => {
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: '#fafbfc' }}>
-      <Grid container>
-        {/* Sidebar */}
-        <Grid item xs={12} md={3} lg={2}>
-          <ProfileSidebar />
-        </Grid>
-        {/* Profile Card/Form */}
-        <Grid item xs={12} md={9} lg={10}>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
             <Card sx={{ width: 500, p: 3, boxShadow: 3, borderRadius: 4 }}>
               <CardContent>
@@ -45,7 +38,7 @@ const ProfilePage = () => {
                 <Grid container spacing={2} mb={2}>
                   <Grid item xs={12} sm={6}>
                     <TextField
-                      label="Full Name"
+                      label="Họ và tên"
                       name="fullName"
                       value={editUser.fullName}
                       onChange={handleChange}
@@ -54,7 +47,7 @@ const ProfilePage = () => {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <TextField
-                      label="Phone Number"
+                      label="Số điện thoạt"
                       name="phoneNumber"
                       value={editUser.phoneNumber}
                       onChange={handleChange}
@@ -72,7 +65,7 @@ const ProfilePage = () => {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <TextField
-                      label="Date of Birth"
+                      label="Ngày sinh"
                       name="dateOfBirth"
                       type="date"
                       value={editUser.dateOfBirth}
@@ -83,7 +76,7 @@ const ProfilePage = () => {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <TextField
-                      label="Address"
+                      label="Địa chỉ"
                       name="address"
                       value={editUser.address}
                       onChange={handleChange}
@@ -92,7 +85,7 @@ const ProfilePage = () => {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <TextField
-                      label="Blood Type"
+                      label="Nhóm máu"
                       name="bloodType"
                       value={editUser.bloodType}
                       onChange={handleChange}
@@ -103,17 +96,15 @@ const ProfilePage = () => {
                 <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
                   <Button
                     variant="contained"
-                    sx={{ bgcolor: 'orange', color: 'white', px: 5, py: 1.5, borderRadius: 3, fontWeight: 600, fontSize: 16, boxShadow: 2, '&:hover': { bgcolor: '#ff9800' } }}
+                    sx={{ bgcolor: '#001feb', color: 'white', px: 5, py: 1.5, borderRadius: 3, fontWeight: 600, fontSize: 16, boxShadow: 2, '&:hover': { bgcolor: '#001feb' } }}
                     onClick={handleSave}
                   >
-                    Save Changes
+                    Lưu thay đổi
                   </Button>
                 </Box>
               </CardContent>
             </Card>
           </Box>
-        </Grid>
-      </Grid>
     </Box>
   );
 };
