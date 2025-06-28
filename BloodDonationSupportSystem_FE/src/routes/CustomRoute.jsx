@@ -40,6 +40,7 @@ import BloodDonationRequestPage from "../pages/StaffPage/BloodDonationRequestPag
 
 import DonorHealthCheckPage from "../pages/StaffPage/ProcessManagement/DonorHealthCheckPage";
 import DonorProcessPage from "../pages/StaffPage/ProcessManagement/DonorProcessPage";
+import { Navigation } from "../pages/StaffPage/ProcessManagement/Navigation";
 
 
 
@@ -74,8 +75,12 @@ const CustomRoute = () => {
         <Route path="storage/create" element={<CreateBloodBagPage />} />
         <Route path="storage/dashboard" element={<BloodStorageChart/>}/>
         <Route path="find-by-distance" element={<FindDistancePage />} />
-        <Route path="blood-management" element={<DonorHealthCheckPage />} />
-         <Route path="request" element={<BloodDonationRequestPage />} />
+        <Route  path="blood-management/*" element={<Navigation/>} >
+            <Route path="health-check" element={<DonorHealthCheckPage/>} />
+            <Route path="" element={<DonorHealthCheckPage/>} />
+            <Route path="process" element={<DonorProcessPage/>} />
+        </Route>
+        <Route path="request" element={<BloodDonationRequestPage />} />
         <Route
           path="blood-donation-schedule"
           element={<BloodDonationScheduleComponent />}
@@ -89,7 +94,7 @@ const CustomRoute = () => {
         <Route path="posts" element={<ArticlePage/>} />
       </Route>
 
-      
+
       {/* Error Route */}
       <Route path="/404" element={<ErrorPage />}></Route>
     </Routes>
