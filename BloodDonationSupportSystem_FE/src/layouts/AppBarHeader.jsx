@@ -94,7 +94,7 @@ function AppBarHeader() {
     setAnchorElUser(null);
   };
 return (
-    <AppBar position='fixed' sx={{ bgcolor: 'white' }}>
+    <AppBar position='fixed' sx={{ bgcolor: 'white', boxShadow: 'none', borderBottom: '1px solid #e0e0e0' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters >
           {/* logo */}

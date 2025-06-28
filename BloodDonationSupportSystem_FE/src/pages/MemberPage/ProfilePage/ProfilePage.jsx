@@ -1,95 +1,120 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import ProfileView from './ProfileView';
-import ProfileEdit from './ProfileEdit';
-import { Typography, Snackbar, Alert, CircularProgress, Box, Container } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Grid, Card, CardContent, Avatar, Typography, TextField, Button, Stack } from '@mui/material';
+import ProfileSidebar from './ProfileSidebar';
+
+const initialUser = {
+  avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+  fullName: 'Sara Tancredi',
+  phoneNumber: '(+98) 9123728167',
+  dateOfBirth: '1990-05-15',
+  address: 'New York, USA',
+  email: 'SaraTancredi@gmail.com',
+  bloodType: 'A+',
+};
 
 const ProfilePage = () => {
-  const [user, setUser] = useState(null);
-  const [editing, setEditing] = useState(false);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(initialUser);
+  const [editUser, setEditUser] = useState(initialUser);
 
-  useEffect(() => {
-    const token = localStorage.getItem('jwt_token');
-    axios.get('http://localhost:3001/member', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => setUser(res.data.profile))
-      .catch(() => setError('Không thể tải hồ sơ người dùng.'))
-      .finally(() => setLoading(false));
-  }, []);
-
-  const handleSave = (updatedData) => {
-    const { phoneNumber, bloodType, ...editableData } = updatedData;
-    const selectedDate = new Date(editableData.dateOfBirth);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    if (selectedDate > today) {
-      setError('Ngày sinh không được lớn hơn ngày hiện tại.');
-      return;
-    }
-    const token = localStorage.getItem('jwt_token');
-    axios.put(`http://localhost:3001/member}`, editableData, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => {
-        setUser(res.data);
-        setEditing(false);
-        setSuccess('Cập nhật hồ sơ thành công.');
-      })
-      .catch(() => setError('Cập nhật hồ sơ thất bại.'));
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEditUser((prev) => ({ ...prev, [name]: value }));
   };
 
-  if (loading) {
-    return (
-      <Box mt={5} display="flex" justifyContent="center">
-        <CircularProgress />
-      </Box>
-    );
-  }
-
-  if (!user) {
-    return <Typography align="center" mt={5}>Loading user profile...</Typography>;
-  }
+  const handleSave = () => {
+    setUser(editUser);
+  };
 
   return (
-    <>
-      <div className="relative min-h-screen w-full bg-blue-400/40">
-        <div className="absolute inset-0 backdrop-blur-sm z-0" />
-        <div className="relative z-10 flex items-center justify-center min-h-screen w-full px-4">
-          <Container maxWidth="md">
-              <Box sx={{ width: '100%', bgcolor: 'background.paper', borderRadius: 2, boxShadow: 8 }}>
-                {editing ? (
-                  <ProfileEdit user={user} onSave={handleSave} onCancel={() => setEditing(false)} />
-                ) : (
-                  <ProfileView user={user} onEdit={() => setEditing(true)} />
-                )}
-              </Box>
-            <Snackbar
-              open={!!error}
-              autoHideDuration={4000}
-              onClose={() => setError(null)}
-            >
-              <Alert severity="error" onClose={() => setError(null)}>
-                {error}
-              </Alert>
-            </Snackbar>
-
-            <Snackbar
-              open={!!success}
-              autoHideDuration={4000}
-              onClose={() => setSuccess(null)}
-            >
-              <Alert severity="success" onClose={() => setSuccess(null)}>
-                {success}
-              </Alert>
-            </Snackbar>
-          </Container>
-        </div>
-      </div>
-    </>
+    <Box sx={{ minHeight: '100vh', bgcolor: '#fafbfc' }}>
+      <Grid container>
+        {/* Sidebar */}
+        <Grid item xs={12} md={3} lg={2}>
+          <ProfileSidebar />
+        </Grid>
+        {/* Profile Card/Form */}
+        <Grid item xs={12} md={9} lg={10}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+            <Card sx={{ width: 500, p: 3, boxShadow: 3, borderRadius: 4 }}>
+              <CardContent>
+                <Stack alignItems="center" spacing={2} mb={3}>
+                  <Avatar src={user.avatar} sx={{ width: 90, height: 90, boxShadow: 2 }} />
+                  <Typography variant="h6" fontWeight={700}>{user.fullName}</Typography>
+                  <Typography variant="body2" color="text.secondary">{user.address}</Typography>
+                </Stack>
+                <Grid container spacing={2} mb={2}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      label="Full Name"
+                      name="fullName"
+                      value={editUser.fullName}
+                      onChange={handleChange}
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      label="Phone Number"
+                      name="phoneNumber"
+                      value={editUser.phoneNumber}
+                      onChange={handleChange}
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      label="Email"
+                      name="email"
+                      value={editUser.email}
+                      onChange={handleChange}
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      label="Date of Birth"
+                      name="dateOfBirth"
+                      type="date"
+                      value={editUser.dateOfBirth}
+                      onChange={handleChange}
+                      fullWidth
+                      InputLabelProps={{ shrink: true }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      label="Address"
+                      name="address"
+                      value={editUser.address}
+                      onChange={handleChange}
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      label="Blood Type"
+                      name="bloodType"
+                      value={editUser.bloodType}
+                      onChange={handleChange}
+                      fullWidth
+                    />
+                  </Grid>
+                </Grid>
+                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+                  <Button
+                    variant="contained"
+                    sx={{ bgcolor: 'orange', color: 'white', px: 5, py: 1.5, borderRadius: 3, fontWeight: 600, fontSize: 16, boxShadow: 2, '&:hover': { bgcolor: '#ff9800' } }}
+                    onClick={handleSave}
+                  >
+                    Save Changes
+                  </Button>
+                </Box>
+              </CardContent>
+            </Card>
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 

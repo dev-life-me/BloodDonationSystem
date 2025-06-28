@@ -28,8 +28,6 @@ const StaffLayout = () => {
       <Box
         sx={{
           flex: 2,
-          bgcolor: "background.paper",
-          borderRight: "1px solid #ddd",
           height: "100",
         }}
       >
