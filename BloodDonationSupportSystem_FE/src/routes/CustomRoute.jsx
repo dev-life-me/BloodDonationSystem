@@ -10,6 +10,7 @@ import ForgotPasswordPage from "../pages/DefautPage/ForgotPasswordPage/ForgotPas
 import RegisterPage from "../pages/DefautPage/RegisterPage/RegisterPage";
 import MemberLayout from "../layouts/MemberLayout/MemberLayout";
 
+import OverViewPage from "../pages/AdminPage/OverviewPage/OverViewPage";
 import AppointmentHistory from "../pages/MemberPage/BloodDonateHistoryPage/AppointmentHistory";
 
 import AdminLayout from "../layouts/AdminLayout/AdminLayout";
@@ -17,11 +18,11 @@ import StaffLayout from "../layouts/StaffLayout/StaffLayout";
 import Overview from "../pages/StaffPage/Overview";
 
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
-import DonationManagement from "../pages/StaffPage/DonationManagement";
+
 import BloodDonationScheduleList from "../pages/DefautPage/BloodDonationSchedulePage/BloodDonationScheduleList";
 import BloodDonationScheduleComponent from "../pages/StaffPage/BloodDonationSchedulePage/BloodDonationSchedule.Component";
 import AppointmentDetail from "../pages/MemberPage/BloodDonateHistoryPage/AppoitmentDetail";
-import BloodDonorReport from "../pages/AdminPage/OverviewPage/BloodDonorReport";
+
 import BloodStoragePage from "../pages/StaffPage/BloodStoragePage";
 import CreateBloodBagPage from "../pages/StaffPage/CreateBloodBagPage";
 import FindDistancePage from "../pages/StaffPage/FindByDistance/FindDistancePage";
@@ -83,10 +84,12 @@ const CustomRoute = () => {
 
       {/* Admin Route */}
       <Route path="/admin/*" element={<AdminLayout />}>
-        <Route path="overview" element={<BloodDonorReport />} />
+        <Route path="overview" element={<OverViewPage />} />
         <Route path="user-management" element={<UserManagement />} />
         <Route path="posts" element={<ArticlePage/>} />
       </Route>
+
+      
       {/* Error Route */}
       <Route path="/404" element={<ErrorPage />}></Route>
     </Routes>
