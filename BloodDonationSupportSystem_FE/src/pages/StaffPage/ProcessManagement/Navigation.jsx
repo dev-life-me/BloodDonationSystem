@@ -1,10 +1,13 @@
     import { Button, Card,Container, CardContent, Stack, Typography, Box } from "@mui/material"
     import { Heart, ClipboardCheck } from "lucide-react"
-import { Outlet, useNavigate } from "react-router-dom"
+import { Outlet, useLocation, useNavigate } from "react-router-dom"
 
     export function Navigation() {
 
+    const location = useLocation()
     const navigate = useNavigate()
+    const pathname = location.pathname
+
     const navItems = [
         {
         path: "/staff/blood-management/health-check",
@@ -24,15 +27,15 @@ import { Outlet, useNavigate } from "react-router-dom"
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Card sx={{ p: 2}}>
         <CardContent >
-            <Stack spacing={2} direction="row">
+            <Stack spacing={2} direction="row" >
             {navItems.map((item) => {
                 const Icon = item.icon
-                // const isActive = pathname === item.path
+                const isActive = pathname === item.path
 
                 return (
                 <Button
                     key={item.path}
-                    // variant={isActive ? "contained" : "outlined"}
+                    variant={isActive ? "contained" : "outlined"}
                     onClick={() => navigate(item.path)}
                     startIcon={<Icon size={24} />}
                     sx={{
