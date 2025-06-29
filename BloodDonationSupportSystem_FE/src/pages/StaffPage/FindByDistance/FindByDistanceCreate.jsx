@@ -1,114 +1,122 @@
 import React, { useState } from "react";
 import {
   Box,
-  TextField,
   Slider,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
   Button,
-  Card,
-  CardContent,
   Typography,
-  Avatar,
-  Stack,
-  IconButton,
   FormHelperText,
+  ToggleButtonGroup,
+  ToggleButton,
 } from "@mui/material";
-import { Grid } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+import { searchDonorsApi } from "../../../api/staffService";
+import { useForm } from "react-hook-form";
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 const bloodTypes = [
-  { value: "A_POSITIVE", label: "A+" },
-  { value: "A_NEGATIVE", label: "A-" },
-  { value: "B_POSITIVE", label: "B+" },
-  { value: "B_NEGATIVE", label: "B-" },
-  { value: "AB_POSITIVE", label: "AB+" },
-  { value: "AB_NEGATIVE", label: "AB-" },
-  { value: "O_POSITIVE", label: "O+" },
-  { value: "O_NEGATIVE", label: "O-" },
+  { value: "A+", label: "A+" },
+  { value: "A-", label: "A-" },
+  { value: "B+", label: "B+" },
+  { value: "B-", label: "B-" },
+  { value: "AB+", label: "AB+" },
+  { value: "AB-", label: "AB-" },
+  { value: "O+", label: "O+" },
+  { value: "O-", label: "O-" },
 ];
-
-const defaultFilters = {
-  distance: 10,
-  bloodTypes: [],
-  availableNow: false,
+const vietnameseText = {
+  columnMenuSortAsc: "Sắp xếp tăng dần",
+  columnMenuSortDesc: "Sắp xếp giảm dần",
+  columnMenuFilter: "Lọc",
+  columnMenuHideColumn: "Ẩn cột",
+  columnMenuManageColumns: "Quản lý cột",
+  noRowsLabel: "Bắt đầu tìm kiếm - Tìm kiếm trên nhóm máu và khoảng cách",
+  loadingOverlayLabel: "Đang tải...",
+  toolbarColumns: "Cột",
+  toolbarFilters: "Bộ lọc",
+  toolbarExport: "Xuất",
 };
 
-const mockUsers = [ 
-  {
-    id: 1, fullname: "Nguyễn Văn Táo", bloodType: "A_POSITIVE", lastDonation: "3 tháng trước", phoneNumber: "0909199518",
-  },
-  {
-    id: 2, fullname: "Nguyễn Văn Xoài", bloodType: "O_NEGATIVE", lastDonation: "1 tháng trước", phoneNumber: "0909199528",
-  },
-  {
-    id: 3,fullname: "Nguyễn Văn Đào", bloodType: "AB_POSITIVE", lastDonation: "5 tháng trước", phoneNumber: "0909199538",
-  },
-  {
-    id: 4, fullname: "Nguyễn Văn Mận", bloodType: "AB_POSITIVE", lastDonation: "2 tháng trước", phoneNumber: "0909199548",
-  },
-];
-
-const FindByDistanceCreate = () => {
-  const [filters, setFilters] = useState(defaultFilters);
+const DistanceSearchWithDataGrid = () => {
+  const [filters, setFilters] = useState({ distance: 10, bloodTypes: [] });
   const [results, setResults] = useState([]);
-  const [errors, setErrors] = useState({
-    bloodTypes: "",
-    availableNow: "",
-  });
-  const handleSearch = () => {
-    let hasError = false;
-    const newErrors = { bloodTypes: "", availableNow: "" };
-  
+  const [loading, setLoading] = useState(false);
+  const [customError, setCustomError] = useState("");
+
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async () => {
+    setCustomError("");
+
     if (filters.bloodTypes.length === 0) {
-      newErrors.bloodTypes = "Vui lòng chọn ít nhất một nhóm máu.";
-      hasError = true;
+      setCustomError("Vui lòng chọn ít nhất một nhóm máu.");
+      return;
     }
-  
-    if (!filters.availableNow) {
-      newErrors.availableNow = "Vui lòng chọn trạng thái sẵn sàng.";
-      hasError = true;
+
+    setLoading(true);
+    try {
+      const response = await searchDonorsApi(filters);
+      console.log("resp" + response);
+
+      const dataWithIds = response.data.data.map((item, index) => ({
+        id: index + 1,
+        stt: index + 1,
+        ...item,
+      }));
+
+      setResults(dataWithIds);
+    } catch (error) {
+      alert("Không thể tìm kiếm. Vui lòng thử lại sau." + error);
+    } finally {
+      setLoading(true);
     }
-  
-    setErrors(newErrors);
-  
-    // chỗ này dừng không search khi có lỗi
-    if (hasError) return; 
-  
-    // Lọc dữ liệu khi không có lỗi:
-    const filtered = mockUsers.filter(
-      (user) => filters.bloodTypes.includes(user.bloodType)
-    );
-  
-    setResults(filtered);
   };
 
-  const handleChange = (newFilters) => {
-    setFilters(newFilters);
-  };
-
-  const handleBloodTypeChange = (value) => {
-    const currentTypes = filters.bloodTypes;
-    const updatedTypes = currentTypes.includes(value)
-      ? currentTypes.filter((type) => type !== value)
-      : [...currentTypes, value];
-    setFilters({ ...filters, bloodTypes: updatedTypes });
-  };
+  const columns = [
+    {
+      field: "stt",
+      headerName: "STT",
+      width: 80,
+      sortable: false,
+      filterable: false,
+      disableColumnMenu: true,
+    },  
+    {
+      field: "donorName",
+      headerName: "Họ tên",
+      flex: 1,
+      sortable:false,
+      disableColumnMenu: true,
+    },
+    { field: "bloodType", headerName: "Nhóm máu", flex: 1,   sortable:false,
+    disableColumnMenu: true,  },
+    { field: "lastDonationDate", headerName: "Lần hiến gần nhất", flex: 1,   sortable:false,
+    disableColumnMenu: true, renderCell: (params) => {
+      const getDate = params.value;
+      const date = new Date(getDate);
+      return date.toLocaleDateString("vi-VN");
+    }},
+    { field: "phoneNumber", headerName: "Số điện thoại", flex: 1 ,   sortable:false,
+    disableColumnMenu: true,},
+  ];
 
   return (
-    <Box sx={{ p: 4, maxWidth: "md", mx: "auto" }}>
-      <Box sx={{ border: "1px solid black", p: 3 }}>
-        <Typography sx={{ fontSize: "24px" }}>
-          Tìm người hiến máu theo khoảng cách
+    <Box sx={{ maxWidth: 1000, mx: "auto", background: "#f8fafc", minHeight: "100vh", py: 4 }}>
+      <Box
+        component="form"
+        onSubmit={handleSubmit(onSubmit)}
+        sx={{ border: "1px solid #ccc", borderRadius: 2, p: 3, background: "white", boxShadow: 2 }}
+      >
+        <Typography variant="h6" sx={{ mb: 1 }}>
+          <LocationOnIcon sx={{ color: "#4949ff" }} />
+          Tìm kiếm người hiến máu theo khoảng cách
         </Typography>
-        
-        <Typography gutterBottom sx={{ mt: "16px" }}>
-          Số khoảng cách tìm kiếm(km)
-        </Typography>
+     
+        <Typography gutterBottom>Khoảng cách tìm kiếm (km)</Typography>
         <Slider
           value={filters.distance}
-          onChange={(e, newVal) =>
-            handleChange({ ...filters, distance: newVal })
-          }
+          onChange={(e, val) => setFilters({ ...filters, distance: val })}
           min={1}
           max={50}
           step={1}
@@ -120,120 +128,88 @@ const FindByDistanceCreate = () => {
           ]}
         />
 
-        <Typography gutterBottom>Nhóm máu</Typography>
-        <FormGroup row>
+      
+
+        <Typography gutterBottom sx={{ mt: 1 }}>
+          Nhóm máu cần tìm kiếm
+        </Typography>
+        <ToggleButtonGroup
+          value={filters.bloodTypes}
+          onChange={(e, newTypes) =>
+            setFilters({ ...filters, bloodTypes: newTypes })
+          }
+          aria-label="blood types"
+          color="white"
+          sx={{ flexWrap: "no-wrap" }}
+        >
           {bloodTypes.map((type) => (
-            <FormControlLabel
+            <ToggleButton
               key={type.value}
-              control={
-                <Checkbox
-                  checked={filters.bloodTypes.includes(type.value)}
-                  onChange={() => handleBloodTypeChange(type.value)}
-                />
-              }
-              label={type.label}
-            />
+              value={type.value}
+              sx={{
+                m: 0.5,
+                width: 115,
+                height: 36,
+                color: "black",
+                flex:1,
+                backgroundColor: filters.bloodTypes.includes(type.value)
+                  ? "#ccc"
+                  : "white",
+                "&.Mui-selected": {
+                  color: "white",
+                  backgroundColor: "#fa0001",
+                },
+                "&:hover": {
+                  color: "white",
+                  backgroundColor: "#fa0001",
+                },
+              }}
+            >
+              {type.label}
+            </ToggleButton>
           ))}
-        </FormGroup>
-        {errors.bloodTypes && (
-          <FormHelperText sx={{ color: "red", ml: 2 }}>
-            {errors.bloodTypes}
+        </ToggleButtonGroup>
+        {customError && (
+          <FormHelperText sx={{ color: "red", ml: 1.5 }}>
+            {customError}
           </FormHelperText>
         )}
 
-        <Typography gutterBottom>Trạng thái</Typography>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={filters.availableNow}
-                onChange={(e) =>
-                  handleChange({ ...filters, availableNow: e.target.checked })
-                }
-              />
-            }
-            label="Đang sẵn sàng"
-          />
-          {errors.availableNow && (
-            <Typography variant="caption" color="error" sx={{ ml: 3 }}>
-              {errors.availableNow}
-            </Typography>
-          )}
-        </FormGroup>
+        <Button type="submit" fullWidth variant="contained" sx={{ mt: 1 }}>
+          Tìm kiếm Ngay
+        </Button>
+      </Box>
 
-        <Box sx={{ mt: 2, display: "flex", justifyContent: "center" }}>
-          <Button
-            variant="contained"
-            onClick={handleSearch}
-            sx={{ minWidth: "300px", height: 40 }}
-          >
-            Search
-          </Button>
+      {loading && (
+        <Typography sx={{ mt: 2, color: "#1976d2" }}>Đang tìm kiếm...</Typography>
+      )}
+      {!loading && results.length === 0 && (
+        <Typography sx={{ mt: 2 }}>Không tìm thấy người trong phạm vi.</Typography>
+      )}
+      {results.length > 0 && (
+        <Box sx={{ mt: 3, p: 2, background: "white", borderRadius: 2, boxShadow: 1 }}>
+          <Typography sx={{ mb: 1 }}>Kết quả: {results.length} người</Typography>
+          <div style={{ height: 600, width: "100%" }}>
+            <DataGrid
+              sx={{
+                ".MuiDataGrid-columnHeader": {
+                  background: "#1976d3",
+                  color: "white",
+                },
+              }}
+              rows={results}
+              columns={columns}
+              localeText={vietnameseText}
+              pagination
+              initialState={{
+                pagination: { paginationModel: { page: 0, pageSize: 9 } },
+              }}
+            />
+          </div>
         </Box>
-      </Box>
-      <Box>
-        <Grid container spacing={2} sx={{ mt: 3 }}>
-          {results.map((user) => (
-            <Grid item xs={12} sm={6} md={4} key={user.id}>
-              <Card sx={{ height: "100%" }}>
-                <CardContent>
-                  <Stack direction="column" spacing={1}>
-                    <Stack
-                      direction="row"
-                      justifyContent="space-between"
-                      alignItems="center"
-                      spacing={1}
-                    >
-                      <Typography
-                        variant="h6"
-                        sx={{
-                          whiteSpace: "nowrap",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          flexGrow: 1,
-                        }}
-                      >
-                        {user.fullname}
-                      </Typography>
-                      <Button
-                        variant="contained"
-                        size="small"
-                        sx={{
-                          backgroundColor: "#FFC107",
-                          color: "#000",
-                          "&:hover": {
-                            backgroundColor: "#FFA000",
-                          },
-                          minWidth: "auto",
-                          padding: "4px 8px",
-                        }}
-                      >
-                        Liên hệ
-                      </Button>
-                    </Stack>
-
-                    <Typography variant="body2">
-                      Nhóm máu:{" "}
-                      {user.bloodType
-                        .replace("_", " ")
-                        .replace("POSITIVE", "+")
-                        .replace("NEGATIVE", "-")}
-                    </Typography>
-                    <Typography variant="body2">
-                      Lần gần nhất: {user.lastDonation}
-                    </Typography>
-                    <Typography variant="body2">
-                      Số điện thoại: {user.phoneNumber}
-                    </Typography>
-                  </Stack>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+      )}
     </Box>
   );
 };
 
-export default FindByDistanceCreate;
+export default DistanceSearchWithDataGrid;

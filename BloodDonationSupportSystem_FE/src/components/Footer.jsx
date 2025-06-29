@@ -5,9 +5,9 @@ import PhoneIcon from '@mui/icons-material/Phone';
 export default function Footer() {
     return (
         <div>
-            <Box bgcolor={"gray"} maxWidth="100%" height={50} display="flex" justifyContent="center" alignItems="center" color={"white"}>
+            <Box bgcolor={"gray"} maxWidth="100%" height={70} display="flex" justifyContent="center" alignItems="center" color={"white"}>
                 
-                <img src="logo\logo.png" alt="Blood Donation Center Logo" style={{ height: 60, marginRight: 10  }} />   
+                <img src="/logo/logo.png" alt="Blood Donation Center Logo" style={{ height: 60, marginRight: 10  }} />   
                 <Typography variant="h6" component="div">
                     BLOOD DONATION CENTER
                 </Typography>
@@ -18,7 +18,7 @@ export default function Footer() {
                 </Typography>
                 {/* TT Hiến Máu Nhân Đạo */}
                 <div style={{ display: 'flex', width: '100%', marginTop: 16 }}>
-                    {/* địa chỉchỉ */}
+                    {/* địa chỉ*/}
                     <div style={{ flex: 1 }}>
                         <Typography variant="subtitle1" sx={{ fontWeight: 'bold', marginTop: 2 }}>TT Hiến Máu Nhân Đạo</Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>

@@ -97,7 +97,7 @@ const BloodInformation = () => {
 
   return (
     <Container sx={{ py: 4 }}>
-      <Typography variant="h4" align="center" fontWeight="bold" gutterBottom>      
+      <Typography variant="h4" align="center" sx={{ color: "#1976d2" }} fontWeight="bold" gutterBottom>      
         Thông tin nhóm máu
       </Typography>
 

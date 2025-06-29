@@ -41,7 +41,7 @@ const blogPosts = [
 const Blog = () => {
   return (
     <Container sx={{ py: 4 }}>
-      <Typography variant="h4" fontWeight="bold" align="center" gutterBottom>
+      <Typography variant="h4" fontWeight="bold" sx={{ color: "#1976d2" }} align="center" gutterBottom>
         Blog Chia Sẻ Kinh Nghiệm
       </Typography>
 
@@ -49,12 +49,12 @@ const Blog = () => {
         {blogPosts.map((post, index) => (
           <Accordion key={index} sx={{ mb: 2 }}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="subtitle1" fontWeight="bold">
+              <Typography variant="subtitle1" fontWeight="bold" sx={{ color: "#1976d2" }}>
                 {post.title}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" sx={{ color: "black" }}>
                 {post.description}
               </Typography>
             </AccordionDetails>

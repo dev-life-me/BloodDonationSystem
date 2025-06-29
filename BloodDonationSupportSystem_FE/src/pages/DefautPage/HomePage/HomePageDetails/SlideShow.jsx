@@ -4,11 +4,11 @@ import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 
 const slides = [
   {
-    image: "/banner/banner1.jpg",
+    image: "/banner/banner4.png",
     caption: "Hinh 1",
   },
   {
-    image: "/banner/banner2.jpg",
+    image: "/banner/banner5.png",
     caption: "Hinh 2",
   },
 
@@ -45,11 +45,15 @@ const Banner = () => {
         <Box
           key={index}
           sx={{
-            display: index === current ? "block" : "none",
             width: "100%",
             height: "100%",
             position: "absolute",
-            transition: "all 0.5s ease-in-out",
+            top: 0,
+            left: 0,
+            opacity: index === current ? 1 : 0,
+            zIndex: index === current ? 2 : 1,
+            transition: "opacity 0.8s cubic-bezier(0.4,0,0.2,1)",
+            pointerEvents: index === current ? "auto" : "none",
           }}
         >
           <img
@@ -59,6 +63,7 @@ const Banner = () => {
               width: "100%",
               height: "100%",
               objectFit: "cover",
+              objectPosition: "center",
               display: "block",
             }}
           />

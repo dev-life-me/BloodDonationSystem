@@ -46,7 +46,7 @@ export default function News() {
 								display: "flex",
 							}}
 						>
-							<Link to={news.link} style={{ textDecoration: "none", color: "inherit", width: "100%" }}>
+							<Link to={`/news/${news.id}`} style={{ textDecoration: "none", color: "inherit", width: "100%" }}>
 								<Card
 									sx={{
 										marginBottom : 2,
