@@ -11,7 +11,7 @@ import RegisterPage from "../pages/DefautPage/RegisterPage/RegisterPage";
 import MemberLayout from "../layouts/MemberLayout/MemberLayout";
 
 import OverViewPage from "../pages/AdminPage/OverviewPage/OverViewPage";
-import AppointmentHistory from "../pages/MemberPage/BloodDonateHistoryPage/AppointmentHistory";
+
 
 import AdminLayout from "../layouts/AdminLayout/AdminLayout";
 import StaffLayout from "../layouts/StaffLayout/StaffLayout";
@@ -21,7 +21,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 import BloodDonationScheduleList from "../pages/DefautPage/BloodDonationSchedulePage/BloodDonationScheduleList";
 import BloodDonationScheduleComponent from "../pages/StaffPage/BloodDonationSchedulePage/BloodDonationSchedule.Component";
-import AppointmentDetail from "../pages/MemberPage/BloodDonateHistoryPage/AppoitmentDetail";
+
 
 import BloodStoragePage from "../pages/StaffPage/BloodStoragePage";
 import CreateBloodBagPage from "../pages/StaffPage/CreateBloodBagPage";
@@ -43,6 +43,9 @@ import DonorProcessPage from "../pages/StaffPage/ProcessManagement/DonorProcessP
 import { Navigation } from "../pages/StaffPage/ProcessManagement/Navigation";
 import ProfileSidebar from "../pages/MemberPage/ProfilePage/ProfileSidebar";
 import ProfileLayout from "../pages/MemberPage/ProfilePage/ProfileLayout";
+import BloodDonateHistory from "../pages/MemberPage/BloodDonateHistoryPage/BloodDonateHistory";
+import AppointmentHistory from "../pages/MemberPage/BloodDonateHistoryPage/AppointmentHistory";
+import AppointmentDetail from "../pages/MemberPage/BloodDonateHistoryPage/AppointmentDetail";
 
 
 
@@ -61,14 +64,15 @@ const CustomRoute = () => {
         <Route path="reset-password" element={<ForgotPasswordPage />} />
         <Route path="signup" element={<RegisterPage />} />
         <Route path="event" element={<BloodDonationScheduleList />} />
+        
         <Route path="/user" element={<MemberLayout />}>
-
-         <Route path="appointment-histories" element={<AppointmentHistory />} />
-                    <Route path="appointment-histories/:id" element={<AppointmentDetail />} />
-                    <Route path="blood-donation-register" element={<DonationRegistration/>} />
-                     <Route path="profile/*" element={<ProfileLayout />} >
-                      <Route index element={<ProfilePage/>}/>
-                     </Route>
+          <Route path="blood-donation-register" element={<DonationRegistration />} />
+          <Route path="profile/*" element={<ProfileLayout />} >
+            <Route index element={<ProfilePage />} />
+            <Route path="history" element={<BloodDonateHistory />} />
+            {/* <Route path="appointment-histories" element={<AppointmentHistory />} /> */}
+            <Route path="appointment-histories/:id" element={<AppointmentDetail />} />
+          </Route>
         </Route>
       </Route>
 
@@ -77,12 +81,12 @@ const CustomRoute = () => {
         <Route path="overview" element={<Overview />} />
         <Route path="storage/blood-bag-list" element={<BloodStoragePage />} />
         <Route path="storage/create" element={<CreateBloodBagPage />} />
-        <Route path="storage/dashboard" element={<BloodStorageChart/>}/>
+        <Route path="storage/dashboard" element={<BloodStorageChart />} />
         <Route path="find-by-distance" element={<FindDistancePage />} />
-        <Route  path="blood-management/*" element={<Navigation/>} >
-            <Route path="health-check" element={<DonorHealthCheckPage/>} />
-            <Route path="" element={<DonorHealthCheckPage/>} />
-            <Route path="process" element={<DonorProcessPage/>} />
+        <Route path="blood-management/*" element={<Navigation />} >
+          <Route path="health-check" element={<DonorHealthCheckPage />} />
+          <Route path="" element={<DonorHealthCheckPage />} />
+          <Route path="process" element={<DonorProcessPage />} />
         </Route>
         <Route path="request" element={<BloodDonationRequestPage />} />
         <Route
@@ -95,7 +99,7 @@ const CustomRoute = () => {
       <Route path="/admin/*" element={<AdminLayout />}>
         <Route path="overview" element={<OverViewPage />} />
         <Route path="user-management" element={<UserManagement />} />
-        <Route path="posts" element={<ArticlePage/>} />
+        <Route path="posts" element={<ArticlePage />} />
       </Route>
 
 

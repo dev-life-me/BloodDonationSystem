@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, Typography } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
@@ -6,10 +6,12 @@ import HistoryIcon from '@mui/icons-material/History';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+
+
 const items = [
   { label: 'Hồ sơ', icon: <PersonIcon />, path: '/user/profile' },
-  { label: 'Chứng chỉ', icon: <WorkspacePremiumIcon />, path: '/user/certificate' },
-  { label: 'Lịch sử hiến máu', icon: <HistoryIcon />, path: '/user/history' },
+  { label: 'Chứng chỉ', icon: <WorkspacePremiumIcon />, path: '/user/profile/certificate' },
+  { label: 'Lịch sử hiến máu', icon: <HistoryIcon />, path: '/user/profile/history' },
 ];
 
 const SIDEBAR_WIDTH = 220;
@@ -18,18 +20,17 @@ const ProfileSidebar = () => {
   const navigate = useNavigate()
   const location = useLocation();
 
-
   // Get current selected item based on location
   const getCurrentSelectedItem = () => {
     const currentPath = location.pathname;
     for (const item of items) {
 
-      if (item === currentPath) return item.path;
+      if (item.path === currentPath) return item.label;
     }
-    return 'Hồ sơ';
+    return 'Lịch sử hiến máu'; // Default to profile if no match
   };
 
-  const [selectedItem, setSelectedItem] = useState(getCurrentSelectedItem());
+  const selectedItem = getCurrentSelectedItem();
 
   return (
     <Box sx={{
@@ -56,7 +57,7 @@ const ProfileSidebar = () => {
               <ListItemButton
                 selected={selectedItem === item.label}
                 onClick={() => {
-                  setSelectedItem(item.label);
+                
                   navigate(item.path);
                 }}
                 sx={{
@@ -90,7 +91,7 @@ const ProfileSidebar = () => {
                   primary={item.label}
                   sx={{
                     '& .MuiListItemText-primary': {
-                      fontWeight: selectedItem === item.text ? 600 : 500,
+                      fontWeight: selectedItem === item.label ? 600 : 500,
                       fontSize: '0.9rem',
                       transition: 'font-weight 0.2s ease-in-out'
                     }

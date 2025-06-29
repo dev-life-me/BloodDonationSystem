@@ -1,28 +1,59 @@
 import { Tabs, Tab, Box, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-import axios from '../../../config/axios';
+import { useState } from 'react';
 import BloodDonateList from './BloodDonateList';
 
-const STATUS_LABELS = ['Đã hiến', 'Chưa hiến', 'Hủy'];
+const STATUS_LABELS = ['ĐÃ HIẾN', 'HỦY'];
+
+// Sample data for demonstration
+const sampleHistoryData = [
+  {
+    donationRegistrationId: 1,
+    donationDate: '2024-01-15',
+    addressHospital: 'Bệnh viện Bạch Mai - Hà Nội',
+    status: 'ĐÃ HIẾN',
+    bloodType: 'A+',
+    volume: 350
+  },
+  {
+    donationRegistrationId: 2,
+    donationDate: '2024-03-20',
+    addressHospital: 'Bệnh viện Chợ Rẫy - TP.HCM',
+    status: 'ĐÃ HIẾN',
+    bloodType: 'A+',
+    volume: 350
+  },
+  {
+    donationRegistrationId: 3,
+    donationDate: '2024-05-10',
+    addressHospital: 'Bệnh viện Đà Nẵng',
+    status: 'ĐÃ HIẾN',
+    bloodType: 'A+',
+    volume: 350
+  },
+  {
+    donationRegistrationId: 4,
+    donationDate: '2024-07-08',
+    addressHospital: 'Bệnh viện Bạch Mai - Hà Nội',
+    status: 'HỦY',
+    bloodType: 'A+',
+    volume: 0
+  },
+  {
+    donationRegistrationId: 5,
+    donationDate: '2024-09-12',
+    addressHospital: 'Bệnh viện Chợ Rẫy - TP.HCM',
+    status: 'HỦY',
+    bloodType: 'A+',
+    volume: 0
+  }
+];
 
 export default function BloodDonateTabs() {
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState(sampleHistoryData);
   const [tabIndex, setTabIndex] = useState(0);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-      axios
-        .get('http://localhost:3001/BloodDonateHistory')
-        .then((res) => setHistory(res.data))
-        .catch((err) => console.error(err))
-        .finally(() => setLoading(false));
-    }, []);
 
   const getListByStatus = (status) =>
-    history.filter(item => item.processStatus === status);
-
-  if (loading) return <Typography>Loading...</Typography>;
+    history.filter(item => item.status === status);
 
   return (
     <Box sx={{ border: '1px solid #ccc', borderRadius: 2, p: 2 }}>
