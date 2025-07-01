@@ -37,8 +37,7 @@ export default function DonorTableHealthCheck({ donors, onEditDonor, onCancelDon
                 <TableCell>Trạng thái sức khỏe</TableCell>
                 <TableCell>Chiều cao</TableCell>
                 <TableCell>Cân nặng</TableCell>
-                <TableCell>Nhóm máu</TableCell>
-                <TableCell>Thao tác</TableCell>
+                <TableCell>Cập nhật</TableCell>
                 <TableCell>Hủy đơn</TableCell>
               </TableRow>
             </TableHead>
@@ -82,8 +81,6 @@ export default function DonorTableHealthCheck({ donors, onEditDonor, onCancelDon
                   <TableCell>{donor.height || '—'}</TableCell>
 
                   <TableCell>{donor.weight || '—'}</TableCell>
-
-                  <TableCell>{donor.bloodType || '—'}</TableCell>
 
                   <TableCell>
                     <Tooltip title="Cập nhật">
