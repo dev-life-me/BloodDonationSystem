@@ -1,5 +1,9 @@
-import { Box, Container, Typography } from "@mui/material";
-
+import { Box, Container, Typography, Grid, Paper, TextField, Button, Dialog } from "@mui/material";
+import { useState } from "react";
+import GroupsIcon from '@mui/icons-material/Groups';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import BloodInformation from "./HomePageDetails/BloodInformation";
 import Blog from "./HomePageDetails/Blog";
@@ -8,10 +12,14 @@ import DonationTips from "./HomePageDetails/DonationTip";
 import ImportantNotes from '../../../components/ImportantNotes';
 import BloodDonationRegister from "./HomePageDetails/BloodDonationRegister";
 import BloodCompatibility from "../../../components/BloodCompatibility";
-
-
+import EmergencyPage from "../EmergencyPage/EmergencyPage";
 
 export default function Home() {
+  const [openRegister, setOpenRegister] = useState(false);
+
+  const handleOpenRegister = () => setOpenRegister(true);
+  const handleCloseRegister = () => setOpenRegister(false);
+
   return (
     <>
       <Container maxWidth={false} style={{ padding: 0 }}>
@@ -27,12 +35,15 @@ export default function Home() {
         </Box>
       </Container>
 
+
+
       {/* <Box sx={{ backgroundColor: '#0D47A1', padding: 2, display: 'flex', justifyContent: 'center' }}>
         <DateSearch />
       </Box> */}
-      <Box sx={{  padding: 2, display: 'flex', justifyContent: 'center' }}>
+   
         <BloodDonationRegister/>
-      </Box>
+
+        <EmergencyPage isEmbedded={true} />
 
       <Box sx={{m: 10}}>
         <BloodCompatibility/>
