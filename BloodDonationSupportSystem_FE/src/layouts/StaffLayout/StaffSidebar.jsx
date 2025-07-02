@@ -57,7 +57,7 @@ const StaffSidebar = () => {
         },
         {
           text: "Kho máu",
-          path: "/staff/storage/dashboard",
+          path: "/staff/storage/blood-bag-list",
           icon: <InventoryIcon />,
         },
         {
@@ -100,7 +100,7 @@ const StaffSidebar = () => {
         color: "#334155",
         display: "flex",
         flexDirection: "column",
-        position: "relative",
+        position: "fixed",
         overflow: "hidden",
         borderRight: "1px solid #e2e8f0",
         height: "100vh",

@@ -22,7 +22,8 @@ export default function BloodDonateHistory() {
       sx={{ 
         bgcolor: alpha(theme.palette.primary.main, 0.02),
         minHeight: '100vh',
-        py: 4
+        py: 4,
+        mx: 50,
       }}
     >
       <Container maxWidth="lg">

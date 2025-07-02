@@ -12,12 +12,15 @@ import {
   Alert,
   useTheme,
   alpha,
+  TextField,
+  InputAdornment,
+  Button,
 } from '@mui/material';
 import {
   Bloodtype,
   LocalHospital,
   Science,
-  Info,
+  Search,
 } from '@mui/icons-material';
 
 // Dữ liệu tương thích máu toàn diện (Vietnamese)
@@ -221,84 +224,84 @@ const BloodCompatibility = () => {
   };
 
   return (
-    <Box sx={{ py: 4, px: 2 }}>
-      <Box sx={{ maxWidth: 1200, mx: 'auto' }}>
+    <Box sx={{ py: 6, px: 2, bgcolor: '#f8f9fa' }}>
+      <Box sx={{ maxWidth: 800, mx: 'auto' }}>
         {/* Header */}
-        <Box textAlign="center" sx={{ mb: 4 }}>
+        <Box textAlign="center" sx={{ mb: 5 }}>
           <Box
             sx={{
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: 80,
-              height: 80,
+              width: 72,
+              height: 72,
               borderRadius: '50%',
               bgcolor: alpha(theme.palette.primary.main, 0.1),
               mb: 2
             }}
           >
-            <Bloodtype sx={{ fontSize: 40, color: theme.palette.primary.main }} />
+            <Search sx={{ fontSize: 36, color: theme.palette.primary.main }} />
           </Box>
-          <Typography variant="h4" fontWeight={700} gutterBottom color="primary">
-            Tra cứu tương thích nhóm máu
+          <Typography variant="h3" fontWeight={700} gutterBottom>
+            Tra Cứu Tương Thích Nhóm Máu
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography variant="h6" color="text.secondary" fontWeight={400}>
             Tìm kiếm tương thích nhóm máu cho các thành phần máu khác nhau
           </Typography>
         </Box>
 
         {/* Blood Type Selection */}
-        <Paper elevation={2} sx={{ p: 3, mb: 3, borderRadius: 3 }}>
-          <Typography variant="h6" gutterBottom fontWeight={600}>
+        <Paper elevation={3} sx={{ p: { xs: 2, md: 4 }, borderRadius: 4 }}>
+          <Typography variant="h5" gutterBottom fontWeight={600}>
             Chọn nhóm máu của bạn
           </Typography>
-          <Box sx={{ mb: 2 }}>
-            <input
-              type="text"
-              placeholder="Tìm kiếm nhóm máu..."
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '8px 12px',
-                fontSize: '1rem',
-                borderRadius: 6,
-                border: '1px solid #ccc',
-                marginBottom: 8
-              }}
-            />
-          </Box>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 2 }}>
+          <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+            Chọn nhóm máu để xem thông tin tương thích hiến và nhận máu
+          </Typography>
+          <TextField
+            fullWidth
+            variant="outlined"
+            placeholder="Tìm kiếm nhóm máu..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search />
+                </InputAdornment>
+              ),
+            }}
+            sx={{ mb: 3 }}
+          />
+          <Grid container spacing={2}>
             {filteredBloodTypes.map((type) => (
-              <Chip
-                key={type}
-                label={type}
-                onClick={() => setSelectedBloodType(type)}
-                variant={selectedBloodType === type ? 'filled' : 'outlined'}
-                color={selectedBloodType === type ? 'primary' : 'default'}
-                sx={{
-                  fontSize: '1rem',
-                  fontWeight: 600,
-                  px: 2,
-                  py: 1,
-                  cursor: 'pointer',
-                  '&:hover': {
-                    transform: 'scale(1.05)',
-                    transition: 'transform 0.2s ease-in-out'
-                  }
-                }}
-              />
+              <Grid item xs={4} sm={3} key={type}>
+                <Button
+                  fullWidth
+                  variant={selectedBloodType === type ? 'contained' : 'outlined'}
+                  color="primary"
+                  onClick={() => setSelectedBloodType(type)}
+                  sx={{
+                    py: 1.5,
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                  }}
+                >
+                  {type}
+                </Button>
+              </Grid>
             ))}
-          </Box>
+          </Grid>
         </Paper>
 
         {selectedBloodType && (
-          <>
+          <Box mt={5}>
             {/* Component Tabs */}
-            <Paper elevation={2} sx={{ borderRadius: 3, overflow: 'hidden' }}>
+            <Paper elevation={3} sx={{ borderRadius: 4, overflow: 'hidden' }}>
               <Tabs
                 value={activeTab}
                 onChange={handleTabChange}
+                variant="fullWidth"
                 sx={{
                   bgcolor: alpha(theme.palette.primary.main, 0.05),
                   '& .MuiTab-root': {
@@ -327,7 +330,7 @@ const BloodCompatibility = () => {
                     <Grid container spacing={3}>
                       {/* Can Receive */}
                       <Grid item xs={12} md={6}>
-                        <Card elevation={1} sx={{ height: '100%' }}>
+                        <Card elevation={0} sx={{ height: '100%', border: '1px solid', borderColor: 'success.light', borderRadius: 2 }}>
                           <CardContent>
                             <Typography variant="h6" gutterBottom fontWeight={600} color="success.main">
                               Có thể nhận từ:
@@ -349,7 +352,7 @@ const BloodCompatibility = () => {
 
                       {/* Can Donate */}
                       <Grid item xs={12} md={6}>
-                        <Card elevation={1} sx={{ height: '100%' }}>
+                        <Card elevation={0} sx={{ height: '100%', border: '1px solid', borderColor: 'info.light', borderRadius: 2 }}>
                           <CardContent>
                             <Typography variant="h6" gutterBottom fontWeight={600} color="info.main">
                               Có thể cho:
@@ -373,7 +376,7 @@ const BloodCompatibility = () => {
                 })()}
               </Box>
             </Paper>
-          </>
+          </Box>
         )}
       </Box>
     </Box>

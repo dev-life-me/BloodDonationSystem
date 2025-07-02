@@ -6,7 +6,7 @@ export default function BloodDonationScheduleComponent () {
     return(
         <Box>
             <BloodDonationSchedule/>
-            <BloodDonationScheduleCreate/>
+      
         </Box>
     );
 }

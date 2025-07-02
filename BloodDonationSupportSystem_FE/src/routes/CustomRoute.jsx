@@ -23,12 +23,12 @@ import BloodDonationScheduleList from "../pages/DefautPage/BloodDonationSchedule
 import BloodDonationScheduleComponent from "../pages/StaffPage/BloodDonationSchedulePage/BloodDonationSchedule.Component";
 
 
-import BloodStoragePage from "../pages/StaffPage/BloodStoragePage";
+
 import CreateBloodBagPage from "../pages/StaffPage/CreateBloodBagPage";
 import FindDistancePage from "../pages/StaffPage/FindByDistance/FindDistancePage";
 
 import BloodStorageChart from "../pages/StaffPage/BloodStorageChart";
-
+import BloodStorageTable from "../pages/StaffPage/BloodDonationInventory/BloodStorageTable";
 
 
 
@@ -46,7 +46,9 @@ import ProfileLayout from "../pages/MemberPage/ProfilePage/ProfileLayout";
 import BloodDonateHistory from "../pages/MemberPage/BloodDonateHistoryPage/BloodDonateHistory";
 import AppointmentHistory from "../pages/MemberPage/BloodDonateHistoryPage/AppointmentHistory";
 import AppointmentDetail from "../pages/MemberPage/BloodDonateHistoryPage/AppointmentDetail";
-
+import BloodDonationReport from "../pages/AdminPage/ReportPage/BloodDonationReport";
+import BloodInventoryReport from "../pages/AdminPage/ReportPage/BloodInventoryReport";
+import Account from "../pages/AdminPage/Account";
 
 
 
@@ -64,7 +66,7 @@ const CustomRoute = () => {
         <Route path="reset-password" element={<ForgotPasswordPage />} />
         <Route path="signup" element={<RegisterPage />} />
         <Route path="event" element={<BloodDonationScheduleList />} />
-        
+
         <Route path="/user" element={<MemberLayout />}>
           <Route path="blood-donation-register" element={<DonationRegistration />} />
           <Route path="profile/*" element={<ProfileLayout />} >
@@ -77,11 +79,10 @@ const CustomRoute = () => {
       </Route>
 
       <Route path="/staff/*" element={<StaffLayout />}>
-        <Route index element={<Overview />} />
-        <Route path="overview" element={<Overview />} />
-        <Route path="storage/blood-bag-list" element={<BloodStoragePage />} />
-        <Route path="storage/create" element={<CreateBloodBagPage />} />
-        <Route path="storage/dashboard" element={<BloodStorageChart />} />
+        <Route index element={<BloodDonationRequestPage />} />
+   
+        <Route path="storage/blood-bag-list" element={<BloodStorageTable />} />
+
         <Route path="find-by-distance" element={<FindDistancePage />} />
         <Route path="blood-management/*" element={<Navigation />} >
           <Route path="health-check" element={<DonorHealthCheckPage />} />
@@ -89,10 +90,8 @@ const CustomRoute = () => {
           <Route path="process" element={<DonorProcessPage />} />
         </Route>
         <Route path="request" element={<BloodDonationRequestPage />} />
-        <Route
-          path="blood-donation-schedule"
-          element={<BloodDonationScheduleComponent />}
-        />
+        <Route path="blood-donation-schedule"element={<BloodDonationScheduleComponent />} />
+        <Route path="profile" element={<ProfilePage />} />
       </Route>
 
       {/* Admin Route */}
@@ -100,6 +99,9 @@ const CustomRoute = () => {
         <Route path="overview" element={<OverViewPage />} />
         <Route path="user-management" element={<UserManagement />} />
         <Route path="posts" element={<ArticlePage />} />
+        <Route path="donation-report" element={<BloodDonationReport />} />
+        <Route path="blood-inventory-report" element={<BloodInventoryReport />} />
+        <Route path="account" element={<Account />} />
       </Route>
 
 
