@@ -26,7 +26,7 @@ export default function FilterBarProcess({
       <CardContent>
         <Grid container spacing={2} alignItems="center">
           {/* 🔍 Tìm kiếm - 2/3 chiều ngang */}
-          <Grid item xs={12} md={8} sx={{ width: 350 }}>
+          <Grid item xs={12} md={8} sx={{ width: 450 }}>
             <TextField
               fullWidth
               label="Tìm kiếm"
@@ -43,7 +43,7 @@ export default function FilterBarProcess({
             />
           </Grid>
 
-          <Grid item xs={12} md={2} sx={{ width: 160 }}>
+          <Grid item xs={12} md={2} sx={{ width: 180 }}>
             <TextField
               type="date"
               fullWidth
@@ -86,27 +86,7 @@ export default function FilterBarProcess({
               <MenuItem value="CHỜ ĐỢI">Chờ đợi</MenuItem>
               <MenuItem value="ĐANG XỬ LÍ">Đang xử lí</MenuItem>
             </TextField>
-          </Grid>
-
-          <Grid item xs={12} md={2} sx={{ width: 100 }}>
-            <TextField
-              select
-              fullWidth
-              label="Nhóm máu"
-              value={bloodTypeFilter}
-              onChange={(e) => setBloodTypeFilter(e.target.value)}
-            >
-              <MenuItem value="all">Tất cả</MenuItem>
-              <MenuItem value="A-">A-</MenuItem>
-              <MenuItem value="A+">A+</MenuItem>
-              <MenuItem value="B-">B-</MenuItem>
-              <MenuItem value="B+">B+</MenuItem>
-              <MenuItem value="O-">O-</MenuItem>
-              <MenuItem value="O+">O+</MenuItem>
-              <MenuItem value="AB-">AB-</MenuItem>
-              <MenuItem value="AB+">AB+</MenuItem>
-            </TextField>
-          </Grid>
+          </Grid>         
 
         </Grid>
       </CardContent>
